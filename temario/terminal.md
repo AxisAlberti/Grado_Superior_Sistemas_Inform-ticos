@@ -11,7 +11,7 @@
 ## 2. Estructura del sistema de archivos en Linux
 - 2.1 Jerarquía y directorios principales
 - 2.2 El sistema de archivos: rutas absolutas y relativas
-- 2.3 Comando `ls` y visualización de directorios
+- 2.3 Usuario, grupos y permisos
 
 ## 3. Navegación entre directorios
 - 3.1 Uso de `pwd` para conocer la ruta actual
@@ -203,4 +203,537 @@ cd ..
 pwd
 # Resultado: /home/alumno
 ```
+
+## 1.4 Opciones avanzadas de comandos básicos
+
+En Linux, la mayoría de los comandos admiten **opciones** que modifican su comportamiento.  
+Estas opciones se escriben precedidas por un guion (`-`) o dos (`--`) si son palabras completas.
+
+A continuación, se presentan algunas de las más utilizadas en comandos esenciales.
+
+### Comando `ls` – listar contenido de directorios
+
+| Opción | Descripción | Ejemplo |
+|---------|--------------|---------|
+| `-a` | Muestra todos los archivos, incluidos los ocultos. | `ls -a` |
+| `-l` | Formato largo: muestra permisos, propietario, tamaño y fecha. | `ls -l` |
+| `-h` | Tamaños legibles (K, M, G). | `ls -lh` |
+| `-R` | Listado recursivo de subdirectorios. | `ls -R` |
+| `-t` | Ordena por fecha de modificación. | `ls -lt` |
+| `-S` | Ordena por tamaño de archivo. | `ls -lS` |
+| `--color=auto` | Muestra los archivos con colores según su tipo. | `ls --color=auto` |
+
+Ejemplo combinado:
+
+```bash
+ls -lhaR /etc
+```
+
+Muestra todos los archivos (incluidos ocultos), en formato largo, con tamaños legibles y de forma recursiva.
+
+---
+
+### Comando `cd` – cambiar de directorio
+
+| Opción | Descripción | Ejemplo |
+|---------|--------------|---------|
+| `cd` | Sin argumentos, lleva al directorio personal del usuario. | `cd` |
+| `cd -` | Regresa al directorio anterior. | `cd -` |
+| `cd ..` | Sube al directorio padre. | `cd ..` |
+
+> **Consejo:** puedes usar rutas absolutas (`/var/www`) o relativas (`../imagenes`), dependiendo del contexto actual.
+
+---
+
+### Comando `cat` – mostrar contenido de archivos
+
+| Opción | Descripción | Ejemplo |
+|---------|--------------|---------|
+| `-n` | Numera las líneas. | `cat -n texto.txt` |
+| `-b` | Numera solo las líneas no vacías. | `cat -b texto.txt` |
+| `-s` | Suprime líneas vacías repetidas. | `cat -s log.txt` |
+
+---
+
+### Comando `grep` – buscar texto dentro de archivos
+
+| Opción | Descripción | Ejemplo |
+|---------|--------------|---------|
+| `-i` | Ignora mayúsculas y minúsculas. | `grep -i error log.txt` |
+| `-r` | Búsqueda recursiva en subdirectorios. | `grep -r "function" src/` |
+| `-n` | Muestra el número de línea donde se encontró la coincidencia. | `grep -n palabra texto.txt` |
+| `--color=auto` | Resalta las coincidencias en color. | `grep --color=auto html index.html` |
+
+---
+
+### Comando `man` – manual de ayuda
+
+| Opción | Descripción | Ejemplo |
+|---------|--------------|---------|
+| `man -k palabra` | Busca comandos relacionados con una palabra clave. | `man -k copy` |
+| `man comando` | Muestra el manual completo del comando. | `man ls` |
+
+---
+
+## 1.5 Manipulación de archivos y directorios
+
+Linux proporciona comandos muy potentes para crear, copiar, mover y eliminar archivos y carpetas.
+
+### Creación de archivos y carpetas
+
+| Comando | Descripción | Ejemplo |
+|----------|--------------|---------|
+| `touch` | Crea un archivo vacío o actualiza su fecha de modificación. | `touch index.html` |
+| `mkdir` | Crea un directorio. | `mkdir proyecto` |
+| `mkdir -p` | Crea directorios anidados. | `mkdir -p web/assets/css` |
+
+---
+
+### Copiar archivos o directorios
+
+| Opción | Descripción | Ejemplo |
+|---------|--------------|---------|
+| `cp archivo destino` | Copia un archivo. | `cp index.html backup/` |
+| `-r` o `-R` | Copia recursiva: incluye subdirectorios. | `cp -r img/ copia_img/` |
+| `-i` | Solicita confirmación antes de sobrescribir. | `cp -i datos.txt backup/` |
+| `-v` | Muestra los archivos mientras se copian (modo verbose). | `cp -v *.html /var/www/html/` |
+
+---
+
+### Mover o renombrar archivos
+
+| Opción | Descripción | Ejemplo |
+|---------|--------------|---------|
+| `mv origen destino` | Mueve o renombra un archivo o carpeta. | `mv app.js js/app.js` |
+| `-i` | Confirma antes de sobrescribir. | `mv -i index.html public/` |
+| `-v` | Muestra los archivos movidos. | `mv -v *.txt backup/` |
+
+---
+
+### Eliminar archivos y carpetas
+
+| Opción | Descripción | Ejemplo |
+|---------|--------------|---------|
+| `rm archivo` | Elimina un archivo. | `rm log.txt` |
+| `rm -r directorio` | Elimina directorios y su contenido recursivamente. | `rm -r cache/` |
+| `rm -f` | Fuerza la eliminación sin confirmación. | `rm -f temporal.log` |
+| `rm -rf` | Elimina sin confirmación y de forma recursiva. | `rm -rf /tmp/test` |
+
+> **Precaución:** `rm -rf` es irreversible; úsalo solo cuando estés seguro.
+
+---
+
+### Ver y combinar archivos
+
+| Comando | Descripción | Ejemplo |
+|----------|--------------|---------|
+| `cat` | Muestra el contenido de un archivo. | `cat index.html` |
+| `less` | Visualiza el contenido con paginación. | `less texto.txt` |
+| `head` | Muestra las primeras líneas. | `head -n 5 log.txt` |
+| `tail` | Muestra las últimas líneas. | `tail -n 10 log.txt` |
+| `tail -f` | Muestra en tiempo real la actualización de un archivo (útil para logs). | `tail -f /var/log/syslog` |
+
+---
+
+## 1.6 Redirecciones y canalizaciones
+
+Una de las características más poderosas del shell es la posibilidad de **redirigir la salida o la entrada** de los comandos, y de **encadenarlos** mediante canalizaciones (*pipes*).
+
+### Redirección de salida estándar (stdout)
+
+Por defecto, los comandos muestran la salida en pantalla. Puede redirigirse a un archivo:
+
+| Operador | Descripción | Ejemplo |
+|-----------|--------------|---------|
+| `>` | Redirige la salida, **sobrescribiendo** el archivo. | `ls -l > listado.txt` |
+| `>>` | Redirige la salida **añadiendo** al final del archivo. | `ls -lh >> listado.txt` |
+
+---
+
+### Redirección de errores (stderr)
+
+| Operador | Descripción | Ejemplo |
+|-----------|--------------|---------|
+| `2>` | Redirige solo los errores. | `ls /carpeta_inexistente 2> errores.log` |
+| `2>>` | Añade errores al final del archivo. | `ls /root 2>> errores.log` |
+
+---
+
+### Combinación de salida y errores
+
+| Operador | Descripción | Ejemplo |
+|-----------|--------------|---------|
+| `> archivo 2>&1` | Redirige salida y errores al mismo archivo. | `comando > salida.log 2>&1` |
+
+---
+
+### Redirección de entrada (stdin)
+
+Permite que un comando lea datos de un archivo.
+
+```bash
+sort < nombres.txt
+```
+
+El comando `sort` leerá el contenido de `nombres.txt` como si lo hubiésemos escrito manualmente.
+
+---
+
+### Canalizaciones (pipes)
+
+El operador `|` conecta la salida de un comando con la entrada de otro.  
+Permite construir cadenas de procesamiento muy potentes.
+
+#### Ejemplos prácticos
+
+Mostrar solo las líneas que contienen “html” en un directorio:
+```bash
+ls -l | grep html
+```
+
+Contar cuántas líneas contienen una palabra:
+```bash
+grep -i "error" log.txt | wc -l
+```
+
+Ver los 10 procesos más consumidores de memoria:
+```bash
+ps aux | sort -nrk 4 | head -n 10
+```
+
+Buscar archivos por nombre y mostrarlos con detalles:
+```bash
+find /var/www -name "*.php" | xargs ls -lh
+```
+
+---
+
+# Tema 2: Estructura del sistema de archivos en Linux
+
+## 2.1 Jerarquía y directorios principales
+
+Linux organiza los archivos en una **jerarquía única** con la raíz en `/`. La mayor parte de las distribuciones siguen el estándar **FHS (Filesystem Hierarchy Standard)**. A continuación, un resumen de los directorios más relevantes y su propósito:
+
+| Directorio | Propósito / Contenido típico |
+|-----------|-------------------------------|
+| `/` | Raíz del sistema de archivos. Punto de partida de toda la jerarquía. |
+| `/bin` | Binarios esenciales para todos los usuarios (p. ej., `ls`, `cp`, `mv`, `cat`). En sistemas modernos suele ser enlace a `/usr/bin`. |
+| `/sbin` | Binarios esenciales de administración (p. ej., `mount`, `fsck`, `ip`). A menudo enlace a `/usr/sbin`. |
+| `/usr` | Software de solo lectura para los usuarios (binarios, bibliotecas, documentación). |
+| `/usr/bin` | Programas de usuario no esenciales para el arranque (la mayoría de comandos). |
+| `/usr/sbin` | Herramientas de administración no esenciales para el arranque. |
+| `/usr/lib`, `/usr/lib64` | Bibliotecas compartidas. |
+| `/usr/local` | Software instalado localmente por el administrador (no gestionado por el sistema de paquetes). |
+| `/var` | Datos variables: logs, colas de impresión, cachés, bases de datos, correo. |
+| `/var/log` | Registros del sistema y servicios. |
+| `/etc` | Configuración del sistema (archivos de texto). |
+| `/home` | Directorios personales de los usuarios. |
+| `/root` | Directorio personal del superusuario `root`. |
+| `/opt` | Paquetes adicionales/propietarios instalados de forma opcional. |
+| `/srv` | Datos de servicios (por ejemplo, contenido de sitios web). |
+| `/media` | Puntos de montaje para dispositivos extraíbles (USB, DVDs). |
+| `/mnt` | Punto de montaje temporal para administradores. |
+| `/run` | Datos de ejecución en tiempo real (tmpfs), sockets y PIDs. |
+| `/tmp` | Archivos temporales (se limpia periódicamente). |
+| `/dev` | Dispositivos (bloque/caracter), pseudo-dispositivos (p. ej., `/dev/null`). |
+| `/proc` | Sistema de archivos virtual con información del kernel y procesos. |
+| `/sys` | Información del kernel y dispositivos (sysfs). |
+| `/boot` | Archivos necesarios para el arranque (kernel, initramfs, cargador). |
+| `/lib`, `/lib64` | Bibliotecas esenciales para el arranque (a veces enlaces a `/usr/lib*`). |
+
+### Tipos de archivos en Linux
+- **Archivo regular** (`-`): datos, texto, binarios.
+- **Directorio** (`d`).
+- **Enlace simbólico** (`l`) y **enlace duro**.
+- **Dispositivo de bloque** (`b`) y **de carácter** (`c`) en `/dev`.
+- **Socket** (`s`) y **FIFO/tubería con nombre** (`p`).
+
+Puede consultarse con:
+```bash
+ls -l            # Tipo en la primera columna (d, -, l, b, c, s, p)
+file <ruta>      # Intenta adivinar el tipo de contenido
+stat <ruta>      # Metadatos detallados (inode, permisos, tiempos, etc.)
+```
+
+### Puntos de montaje y dispositivos
+Los sistemas de archivos (ext4, xfs, vfat, ntfs…) se **montan** en directorios vacíos llamados **puntos de montaje**.
+```bash
+mount            # Muestra sistemas montados
+lsblk            # Dispositivos y particiones
+blkid            # UUID y tipos de sistema de archivos
+```
+
+Nombres de dispositivos habituales:
+- Discos SATA/SCSI: `/dev/sda`, `/dev/sdb`… (particiones: `/dev/sda1`, `/dev/sda2`…)
+- NVMe: `/dev/nvme0n1`, partición 1 → `/dev/nvme0n1p1`
+- MMC/SD: `/dev/mmcblk0p1`
+
+Montaje manual:
+```bash
+sudo mount /dev/sdb1 /mnt
+sudo umount /mnt
+```
+Montaje persistente en `/etc/fstab` (recomendado usar **UUID**):
+```
+UUID=xxxx-xxxx  /datos  ext4  defaults  0  2
+```
+
+---
+
+## 2.2 El sistema de archivos: rutas absolutas y relativas
+
+Una **ruta absoluta** comienza en `/` y define la ubicación exacta de un archivo independientemente del directorio actual:
+```bash
+cd /var/www/html
+```
+
+Una **ruta relativa** parte del **directorio actual**:
+```bash
+cd proyectos/web1      # relativo al directorio actual
+```
+
+Atajos y símbolos:
+- `.`  → directorio actual
+- `..` → directorio padre
+- `~`  → directorio personal del usuario (equivale a `$HOME`)
+
+Ejemplos:
+```bash
+pwd                   # muestra la ruta actual
+cd ..                 # sube un nivel
+cd ~/Descargas        # entra en el directorio Descargas del usuario
+```
+
+Espacios y caracteres especiales:
+```bash
+cd "Mi Carpeta"       # comillas para rutas con espacios
+cd Mi\ Carpeta        # escape con barra invertida
+```
+
+### Globbing (comodines) y expansiones útiles
+- `*`  → cero o más caracteres: `ls *.png`
+- `?`  → un único carácter: `ls foto?.jpg`
+- `[abc]` → conjunto de caracteres: `ls imagen[12].png`
+- `{dev,prod}` → expansión de llaves: `mkdir -p logs/{dev,prod}`
+
+Resolver enlaces y rutas físicas:
+```bash
+readlink -f archivo   # ruta canónica
+pwd -P                # directorio real (sin enlaces simbólicos)
+```
+
+### Enlaces duros y simbólicos
+- **Enlace duro**: otro nombre para el mismo *inode* (solo dentro del mismo sistema de archivos).
+- **Enlace simbólico** (recomendado): un puntero a otro archivo o directorio.
+```bash
+ln archivo.txt copia_dura.txt     # enlace duro
+ln -s /opt/app/config ./config    # symlink
+```
+
+---
+
+## 2.3 Usuario, grupos y permisos
+
+La seguridad y el control de acceso en Linux se basan en **usuarios**, **grupos** y **permisos**. Cada archivo/directorio tiene un **propietario** (usuario) y un **grupo** asociados.
+
+### 2.3.1 Cuentas y ficheros de sistema
+- `/etc/passwd`  → información básica de cuentas (nombre, UID, GID, shell, home).
+- `/etc/shadow`  → contraseñas cifradas y políticas (solo legible por root).
+- `/etc/group`   → definición de grupos y sus miembros.
+
+Consultar identidad y pertenencia:
+```bash
+whoami             # usuario actual
+id                 # UID, GID y grupos
+groups usuario     # grupos de un usuario
+getent passwd user # consulta a la base de cuentas (incluye NSS, LDAP, etc.)
+```
+
+### 2.3.2 Gestión de usuarios
+Los comandos pueden variar (Debian/Ubuntu dispone de `adduser` interactivo). En general:
+
+Crear usuario con directorio personal y shell:
+```bash
+sudo useradd -m -s /bin/bash dev1
+sudo passwd dev1
+```
+Opciones comunes de `useradd`:
+- `-m` crea el home a partir de `/etc/skel`.
+- `-s` establece el shell de login.
+- `-u` fija el **UID**; `-g` el **GID** principal; `-G` grupos secundarios.
+- `-d` define una ruta de home personalizada.
+
+Modificar atributos de un usuario:
+```bash
+sudo usermod -aG docker dev1     # añade a grupo 'docker' (sin -a sobreescribe)
+sudo usermod -s /bin/zsh dev1    # cambia el shell
+sudo usermod -d /srv/dev1 -m dev1 # mueve y renombra su home
+```
+
+Eliminar usuario (con o sin su home):
+```bash
+sudo userdel dev1
+sudo userdel -r dev1  # elimina también el directorio personal
+```
+
+Política de contraseñas y caducidad:
+```bash
+sudo passwd dev1          # cambia/establece contraseña
+sudo chage -l dev1        # consulta caducidad
+sudo chage -M 90 dev1     # obliga cambio cada 90 días
+sudo chage -E 2025-12-31 dev1  # fecha de expiración de la cuenta
+```
+
+Cambios de datos informativos (gecos), shell:
+```bash
+chfn dev1                 # nombre completo, etc.
+chsh -s /bin/bash dev1    # cambia el shell
+```
+
+### 2.3.3 Gestión de grupos
+Crear, modificar y eliminar grupos:
+```bash
+sudo groupadd webdev
+sudo groupmod -n frontend webdev   # renombra grupo
+sudo groupdel frontend
+```
+Añadir/quitar usuarios a grupos secundarios:
+```bash
+sudo usermod -aG webdev dev1
+sudo gpasswd -d dev1 webdev
+```
+Cambiar de grupo efectivo en una sesión:
+```bash
+newgrp webdev
+```
+
+### 2.3.4 Elevación de privilegios: `su`, `sudo` y `visudo`
+- `su -` inicia una sesión como otro usuario (por defecto, root) pidiendo su contraseña.
+- `sudo <comando>` ejecuta un comando como root (o como otro usuario con `-u`) pidiendo la contraseña del **propio** usuario.
+
+Configuración segura de sudoers (siempre con `visudo`):
+```bash
+sudo visudo   # edita /etc/sudoers con comprobación de sintaxis
+```
+Ejemplo mínimo para permitir a un grupo:
+```
+%sudo ALL=(ALL:ALL) ALL
+```
+Para un usuario concreto sin pedir contraseña para un comando específico:
+```
+dev1 ALL=(root) NOPASSWD: /usr/bin/systemctl restart nginx
+```
+
+### 2.3.5 Propietarios y permisos de archivos
+Visualización y significado de permisos (modo simbólico):
+```
+-rwxr-x--- 1 dev1 webdev  1202 oct  8 12:01 deploy.sh
+```
+- `r` lectura, `w` escritura, `x` ejecución.
+- Tres tríos de permisos: **usuario** (u), **grupo** (g), **otros** (o).
+- Propietario: `dev1`, grupo: `webdev`.
+
+Cambiar propietario y grupo:
+```bash
+sudo chown dev1:webdev deploy.sh
+sudo chgrp webdev src/ -R
+```
+Cambio recursivo (útil pero peligroso si no se delimita bien):
+```bash
+sudo chown -R www-data:www-data /var/www/miweb
+```
+
+Modificar permisos con `chmod` (simbólico y numérico):
+```bash
+chmod u+x script.sh      # añade ejecución al usuario
+chmod g-w fichero.txt    # quita escritura al grupo
+chmod o-rwx privado/     # retira todo a otros
+chmod 640 config.yaml    # rw- r-- ---
+chmod 755 run.sh         # rwx r-x r-x
+```
+
+### 2.3.6 Máscara de creación (umask)
+La **umask** define qué permisos se **restan** al crear archivos/directorios.
+- Umask habitual para colaborativo: `002` (archivos 664, directorios 775).
+- Entornos más restrictivos: `022` (archivos 644, directorios 755).
+
+Consultar y fijar temporalmente:
+```bash
+umask           # muestra valor actual
+umask 002       # nueva máscara para la sesión actual
+```
+
+### 2.3.7 Bits especiales: SUID, SGID y Sticky
+- **SUID (4xxx)** en binarios: ejecuta con UID del propietario. Ej.: `chmod u+s /usr/bin/passwd` (ya lo tiene por defecto).
+- **SGID (2xxx)** en binarios o directorios: hereda el GID del directorio. Muy útil para directorios de trabajo compartido.
+- **Sticky bit (1xxx)** en directorios: solo el propietario puede borrar su propio archivo incluso si el directorio es escribible por todos (ej.: `/tmp`).
+
+Ejemplos:
+```bash
+chmod g+s /srv/proyectos/web      # herencia de grupo en subdirectorios
+chmod +t /srv/proyectos/web       # sticky bit
+# numéricos equivalentes (directorio 2775: rwxrwsr-x)
+chmod 2775 /srv/proyectos/web
+```
+
+### 2.3.8 ACLs (Listas de Control de Acceso)
+Permiten permisos más granulares por usuario/grupo, además del trío u/g/o. Requieren soporte del sistema de archivos (ext4/xfs lo soportan por defecto).
+
+Asignar ACL y consultar:
+```bash
+setfacl -m u:dev2:rwx /srv/proyectos/web
+setfacl -m g:qa:r-x  /srv/proyectos/web
+getfacl /srv/proyectos/web
+```
+ACL por defecto para nuevos archivos en un directorio:
+```bash
+setfacl -m d:u:dev2:rwx /srv/proyectos/web
+```
+
+### 2.3.9 Atributos extendidos (chattr/lsattr)
+A nivel de sistema de archivos (ext*), permiten restricciones adicionales.
+```bash
+sudo chattr +i config.yaml   # inmutable: no se puede modificar ni borrar
+lsattr config.yaml
+sudo chattr -i config.yaml
+```
+
+### 2.3.10 Patrones prácticos (escenarios DAW)
+
+**Directorio de proyecto web colaborativo:**
+```bash
+sudo groupadd webteam
+sudo usermod -aG webteam dev1
+sudo usermod -aG webteam dev2
+
+sudo mkdir -p /srv/www/miweb
+sudo chown -R dev1:webteam /srv/www/miweb
+sudo chmod 2775 /srv/www/miweb            # sgid para heredar grupo
+umask 002                                  # sesión colaborativa
+# Con ACLs finas (opcional)
+sudo setfacl -m g:webteam:rwx /srv/www/miweb
+sudo setfacl -m d:g:webteam:rwx /srv/www/miweb
+```
+
+**Servicio web servido por `www-data` y editable por desarrolladores:**
+```bash
+sudo chown -R www-data:webteam /var/www/miapp
+sudo chmod -R 2775 /var/www/miapp
+sudo usermod -aG webteam dev1
+sudo usermod -aG webteam dev2
+```
+
+**Añadir un usuario al grupo `docker` para usar Docker sin sudo:**
+```bash
+sudo usermod -aG docker dev1
+# Cerrar sesión y volver a entrar para refrescar grupos
+```
+
+**Restringir borrado en un directorio compartido:**
+```bash
+sudo chmod +t /srv/compartido   # sticky bit
+```
+
+---
+
 
