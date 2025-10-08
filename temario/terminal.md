@@ -88,12 +88,12 @@ En sistemas Linux podemos encontrar dos tipos principales de terminales:
 - **Emuladores de terminal gráficos:**
   - Permiten usar la consola dentro del entorno de escritorio, combinando potencia y comodidad.
   - Algunos de los emuladores más populares:
-    - **GNOME Terminal** (`gnome-terminal`)
-    - **Konsole** (KDE)
-    - **XTerm**
-    - **Terminator**
-    - **Tilix**
-    - **Alacritty**
+    - GNOME Terminal (`gnome-terminal`)
+    - Konsole (KDE)
+    - XTerm
+    - Terminator
+    - Tilix
+    - Alacritty
 
 **Ejemplo práctico:**
 Para abrir una terminal gráfica, busca el icono en el menú de aplicaciones o pulsa `Ctrl+Alt+T` en la mayoría de escritorios Linux.
@@ -130,12 +130,12 @@ Cuando abres la terminal, el sistema te muestra un *prompt* (habitualmente algo 
     ```
     Te moverás a la carpeta `Documentos` (debe existir dentro de tu ubicación actual).
 
-- **Volver a la carpeta personal del usuario:**
+- **Retroceder al directorio padre:**
 
     ```
-    cd ~
+    cd ..
     ```
-    El atajo `~` siempre te devuelve a tu carpeta de inicio.
+    El comando `cd ..` permite subir un nivel en la jerarquía de directorios (al directorio padre).
 
 ### Ejemplo práctico paso a paso
 
@@ -147,9 +147,11 @@ Cuando abres la terminal, el sistema te muestra un *prompt* (habitualmente algo 
     cd Descargas
     ```
 5. **Confirma dónde estás** escribiendo nuevamente `pwd`.
-6. **Vuelve** a tu carpeta personal ejecutando:
+6. **Retrocede** al directorio padre ejecutando:
     ```
-    cd ~
+    cd ..
     ```
+    Así vuelves al directorio que contiene `Descargas` (normalmente tu carpeta personal si partiste de ahí).
+
 
 
