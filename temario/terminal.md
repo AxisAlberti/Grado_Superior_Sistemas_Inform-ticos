@@ -1,3 +1,24 @@
+# Índice General
+
+1. [Terminal](#1-terminal)
+   - [1.1 ¿Qué es la terminal y por qué usarla?](#11-qué-es-la-terminal-y-por-qué-usarla)
+   - [1.2 Tipos de terminales y emuladores populares](#12-tipos-de-terminales-y-emuladores-populares)
+   - [1.3 Acceso y navegación inicial](#13-acceso-y-navegación-inicial)
+   - [1.4 Opciones avanzadas de comandos básicos](#14-opciones-avanzadas-de-comandos-básicos)
+   - [1.5 Manipulación de archivos y directorios](#15-manipulación-de-archivos-y-directorios)
+   - [1.6 Redirecciones y canalizaciones](#16-redirecciones-y-canalizaciones)
+2. [Estructura del sistema de archivos en Linux](#2-estructura-del-sistema-de-archivos-en-linux)
+   - [2.1 Jerarquía y directorios principales](#21-jerarquía-y-directorios-principales)
+   - [2.2 El sistema de archivos: rutas absolutas y relativas](#22-el-sistema-de-archivos-rutas-absolutas-y-relativas)
+   - [2.3 Usuario, grupos y permisos](#23-usuario-grupos-y-permisos)
+3. [Entorno de desarrollo y configuración práctica en Linux](#4-entorno-de-desarrollo-y-configuración-práctica-en-linux)
+4. [Visualización y edición básica de archivos](#5-visualización-y-edición-básica-de-archivos)
+5. [Permisos y propietarios](#6-permisos-y-propietarios)
+6. [Búsqueda y gestión avanzada](#7-búsqueda-y-gestión-avanzada)
+7. [Gestión de software y repositorios](#9-gestión-de-software-y-repositorios)
+
+---
+
 
 <center>
 <h1>Iniciación a la Terminal y Gestión de Archivos en Linux</h1>
