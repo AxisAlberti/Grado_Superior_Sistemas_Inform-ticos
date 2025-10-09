@@ -1,30 +1,6 @@
-# Índice: Uso de la Terminal y Gestión de Directorios/Archivos en Linux
 
-## 1. Introducción a la terminal
-- 1.1 ¿Qué es la terminal y por qué usarla?
-- 1.2 Tipos de terminales y emuladores populares
-- 1.3 Acceso y navegación inicial
-- 1.4 Opciones avanzadas de comandos básicos  
-- 1.5 Manipulación de archivos y directorios  
-- 1.6 Redirecciones y canalizaciones
+- 
 
-## 2. Estructura del sistema de archivos en Linux
-- 2.1 Jerarquía y directorios principales
-- 2.2 El sistema de archivos: rutas absolutas y relativas
-- 2.3 Usuario, grupos y permisos
-
-## 3. Navegación entre directorios
-- 3.1 Uso de `pwd` para conocer la ruta actual
-- 3.2 Cambio de directorio con `cd`
-- 3.3 Atajos para navegar (directorios padre, inicio, etc.)
-
-## 4. Creación y gestión de archivos y carpetas
-- 4.1 Crear archivos: `touch`
-- 4.2 Crear directorios: `mkdir`
-- 4.3 Copiar archivos y carpetas: `cp`
-- 4.4 Mover y renombrar: `mv`
-- 4.5 Eliminar archivos y carpetas: `rm`, `rmdir`
-- 4.6 Uso de comodines y globbing (`*`, `?`, etc.)
 
 ## 5. Visualización y edición básica de archivos
 - 5.1 Comandos para mostrar contenido (`cat`, `less`, `more`)
@@ -736,4 +712,436 @@ sudo chmod +t /srv/compartido   # sticky bit
 
 ---
 
+## 4. Entorno de desarrollo y configuración práctica en Linux
+
+### 4.1 Introducción al entorno del desarrollador
+
+En Linux, el entorno de desarrollo se construye sobre el **shell**, que actúa como interfaz entre el usuario y el sistema operativo.  
+Desde el shell se pueden ejecutar comandos, configurar variables de entorno, instalar software y automatizar tareas de compilación o despliegue.
+
+El shell más común es **Bash**, aunque también se utilizan **Zsh** o **Fish**.  
+Cuando se abre una terminal, el sistema carga configuraciones iniciales definidas en archivos como:
+
+- `~/.bashrc` → configuración personal que se ejecuta en cada sesión interactiva.  
+- `~/.profile` o `~/.bash_profile` → configuración general del usuario.  
+- `/etc/profile` → configuración global del sistema.
+
+Para aplicar cambios sin cerrar la sesión actual:
+```bash
+source ~/.bashrc
+```
+
+---
+
+### 4.2 Variables de entorno y rutas del sistema
+
+Las **variables de entorno** almacenan información que utilizan tanto el sistema como los programas.  
+Son fundamentales para controlar la forma en que se ejecutan los procesos y localizar herramientas o librerías.
+
+| Variable | Función |
+|-----------|----------|
+| `$PATH` | Define los directorios donde se buscan los comandos ejecutables. |
+| `$HOME` | Indica el directorio personal del usuario. |
+| `$USER` | Muestra el nombre del usuario actual. |
+| `$PWD` | Indica el directorio actual. |
+| `$SHELL` | Indica el intérprete de comandos en uso. |
+| `$LANG` | Determina el idioma y la codificación de la sesión. |
+| `$EDITOR` | Establece el editor de texto por defecto. |
+
+#### Definir y exportar variables
+
+```bash
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH=$PATH:$JAVA_HOME/bin
+```
+
+Esto añade el binario de Java al PATH, permitiendo ejecutar `java` o `javac` desde cualquier directorio.
+
+Eliminar una variable:
+```bash
+unset VARIABLE
+```
+
+Listar todas las variables de entorno activas:
+```bash
+printenv
+```
+
+Estas configuraciones pueden añadirse al archivo `~/.bashrc` o `~/.profile` para que sean permanentes.
+
+---
+
+### 4.3 Alias, funciones y personalización del entorno
+
+Los **alias** sirven para crear atajos que simplifican comandos largos o frecuentes.
+
+```bash
+alias cls='clear'
+alias ejecutar='python3 main.py'
+alias actualizar='sudo apt update && sudo apt upgrade -y'
+```
+
+Para hacerlos permanentes, se guardan en `~/.bashrc` y se recargan con:
+```bash
+source ~/.bashrc
+```
+
+También se pueden definir **funciones** dentro del shell para automatizar tareas repetitivas.
+
+```bash
+deploy() {
+    cd ~/proyecto && python3 manage.py runserver
+}
+```
+
+Este ejemplo cambia al directorio del proyecto y ejecuta el servidor de desarrollo de Django.
+
+---
+
+### 4.4 Configuración del entorno de desarrollo para Python
+
+Python incluye herramientas muy útiles para crear entornos aislados, evitando conflictos entre proyectos.  
+Para ello se utiliza el módulo `venv`.
+
+#### Creación y uso de un entorno virtual
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+# el prompt cambiará indicando que el entorno está activo
+pip install flask
+deactivate
+```
+
+El entorno virtual crea una copia del intérprete y librerías que no afectan al resto del sistema.  
+Esto permite que cada proyecto tenga sus propias dependencias.
+
+Para guardar las dependencias instaladas:
+```bash
+pip freeze > requirements.txt
+```
+
+Y para restaurarlas en otro entorno:
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4.5 Configuración del entorno de desarrollo para Kotlin
+
+Kotlin se ejecuta sobre la **JVM (Java Virtual Machine)**, por lo que requiere tener instalado un JDK (Java Development Kit).
+
+#### Instalación del JDK y Kotlin
+
+```bash
+sudo apt update
+sudo apt install openjdk-17-jdk -y
+sudo apt install kotlin -y
+```
+
+Comprobar la instalación:
+
+```bash
+java -version
+kotlinc -version
+```
+
+#### Compilar y ejecutar un programa Kotlin
+
+```bash
+kotlinc Hola.kt -include-runtime -d Hola.jar
+java -jar Hola.jar
+```
+
+Esto genera un archivo ejecutable `.jar` con el código Kotlin compilado.
+
+Para automatizar compilaciones más complejas se usa **Gradle**, que maneja dependencias y tareas.
+
+```bash
+sudo apt install gradle -y
+gradle build
+```
+
+El entorno Kotlin puede configurarse mediante las variables de entorno:
+```bash
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH=$PATH:/usr/share/kotlin/bin
+```
+
+---
+
+### 4.6 Ejemplo práctico: instalación y configuración de un servidor Apache
+
+**Apache HTTP Server** es uno de los servidores web más utilizados.  
+Su función es recibir peticiones HTTP y devolver contenido web (HTML, imágenes, scripts, etc.).
+
+#### 1. Instalación del servidor
+
+```bash
+sudo apt update
+sudo apt install apache2 -y
+```
+
+#### 2. Verificar el estado del servicio
+
+```bash
+sudo systemctl status apache2
+```
+
+Si está inactivo, iniciarlo:
+```bash
+sudo systemctl start apache2
+```
+
+Y configurarlo para que arranque automáticamente con el sistema:
+```bash
+sudo systemctl enable apache2
+```
+
+#### 3. Comprobar funcionamiento
+
+Abre un navegador y accede a:
+```
+http://localhost
+```
+Debería mostrarse la página de bienvenida de Apache.
+
+#### 4. Directorio raíz y permisos
+
+El contenido web se encuentra en:
+```
+/var/www/html
+```
+
+Puedes editar el archivo principal con:
+```bash
+sudo nano /var/www/html/index.html
+```
+
+Para probar un cambio, edita y guarda una versión personalizada:
+```html
+<h1>Servidor Apache funcionando correctamente</h1>
+```
+
+Reinicia el servicio para aplicar los cambios:
+```bash
+sudo systemctl restart apache2
+```
+
+#### 5. Configuración básica de un sitio
+
+La configuración por defecto se encuentra en:
+```
+/etc/apache2/sites-available/000-default.conf
+```
+
+Para crear un nuevo sitio:
+```bash
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/miweb.conf
+sudo nano /etc/apache2/sites-available/miweb.conf
+```
+
+Modificar las líneas principales:
+```
+ServerName miweb.local
+DocumentRoot /var/www/miweb
+```
+
+Activar el sitio y reiniciar Apache:
+```bash
+sudo a2ensite miweb.conf
+sudo systemctl reload apache2
+```
+
+Por último, crea el directorio del nuevo sitio:
+```bash
+sudo mkdir /var/www/miweb
+sudo chown -R $USER:$USER /var/www/miweb
+echo "<h1>Mi sitio Apache</h1>" > /var/www/miweb/index.html
+```
+
+Comprobar:
+```
+http://miweb.local
+```
+
+---
+
+### 4.7 Buenas prácticas generales
+
+- Mantener el sistema actualizado (`sudo apt update && sudo apt upgrade -y`).
+- No usar `sudo` innecesariamente en entornos de desarrollo.
+- Documentar variables de entorno y alias en un README.
+- Usar entornos virtuales para aislar dependencias (especialmente en Python).
+- Automatizar tareas comunes mediante scripts (`.sh`) o `Makefile`.
+
+---
+
+
+## 5. Visualización y edición básica de archivos
+
+En los entornos Linux, la terminal permite **consultar, visualizar y editar archivos de texto** directamente, sin necesidad de interfaces gráficas.  
+Esto resulta especialmente útil para revisar registros del sistema, modificar configuraciones o inspeccionar código fuente de manera rápida.
+
+---
+
+### 5.1 Comandos para mostrar contenido (`cat`, `less`, `more`)
+
+#### `cat` — Mostrar el contenido completo de un archivo
+
+El comando `cat` (concatenate) permite **visualizar, combinar o crear archivos de texto**.
+
+```bash
+cat archivo.txt
+```
+Muestra el contenido completo del archivo.  
+Si el archivo es largo, el texto pasará rápidamente por pantalla.
+
+**Opciones más usadas:**
+
+| Opción | Descripción | Ejemplo |
+|---------|--------------|---------|
+| `-n` | Numera todas las líneas. | `cat -n archivo.txt` |
+| `-b` | Numera solo las líneas no vacías. | `cat -b archivo.txt` |
+| `-s` | Suprime líneas vacías repetidas. | `cat -s archivo.txt` |
+
+**Combinar archivos:**
+```bash
+cat parte1.txt parte2.txt > completo.txt
+```
+
+**Crear rápidamente un archivo de texto:**
+```bash
+cat > notas.txt
+Escribe aquí el contenido.
+Presiona Ctrl + D para guardar.
+```
+
+---
+
+#### `less` — Lectura interactiva y paginada
+
+`less` es ideal para **leer archivos largos** sin saturar la pantalla.  
+Permite avanzar, retroceder, buscar texto y salir fácilmente.
+
+```bash
+less archivo.log
+```
+**Controles básicos dentro de `less`:**
+- `Espacio`: avanzar una página.
+- `b`: retroceder una página.
+- `/palabra`: buscar un término.
+- `n`: siguiente coincidencia.
+- `q`: salir.
+
+Ventajas sobre `cat`: no carga todo el archivo en memoria, lo muestra página a página.
+
+---
+
+#### `more` — Visualización básica por páginas
+
+`more` fue el precursor de `less`. Tiene funciones similares, aunque menos potentes.
+
+```bash
+more archivo.txt
+```
+
+**Controles básicos:**
+- `Espacio`: avanzar una página.
+- `Enter`: avanzar una línea.
+- `q`: salir.
+
+---
+
+### 5.2 Edición rápida con `nano` y consulta con `head` / `tail`
+
+#### `nano` — Editor de texto en terminal
+
+`nano` es un **editor simple e intuitivo**, perfecto para modificaciones rápidas.
+
+Abrir o crear un archivo:
+```bash
+nano archivo.txt
+```
+
+**Combinaciones más usadas:**
+- `Ctrl + O`: guardar cambios.
+- `Ctrl + X`: salir del editor.
+- `Ctrl + W`: buscar texto.
+- `Ctrl + K`: cortar línea.
+- `Ctrl + U`: pegar.
+
+**Ejemplo práctico:**  
+Editar el archivo de configuración del servidor Apache:
+```bash
+sudo nano /etc/apache2/apache2.conf
+```
+
+---
+
+#### `head` — Mostrar las primeras líneas
+
+Permite ver solo el inicio de un archivo, útil para revisar encabezados o estructuras.
+
+```bash
+head archivo.txt
+```
+Por defecto muestra las 10 primeras líneas.  
+Cambiar la cantidad de líneas mostradas:
+```bash
+head -n 20 archivo.txt
+```
+
+---
+
+#### `tail` — Mostrar las últimas líneas
+
+Muestra el final de un archivo, muy útil para consultar registros (logs).
+
+```bash
+tail archivo.log
+```
+Por defecto muestra las últimas 10 líneas.  
+Para ver las últimas 50:
+```bash
+tail -n 50 archivo.log
+```
+
+**Modo seguimiento en tiempo real (`-f`):**
+```bash
+tail -f /var/log/syslog
+```
+Muestra en vivo las nuevas líneas que se agregan al archivo. Es esencial para monitorear servidores, procesos o aplicaciones web en ejecución.
+
+---
+
+### 5.3 Visualización de archivos ocultos
+
+En Linux, los archivos ocultos son aquellos cuyo nombre comienza con un punto (`.`).  
+Estos archivos suelen almacenar configuraciones personales o del sistema, como `.bashrc`, `.gitconfig` o `.ssh/`.
+
+Para mostrar archivos ocultos en el directorio actual:
+```bash
+ls -a
+```
+
+Para mostrar información detallada (permisos, fechas, tamaño):
+```bash
+ls -la
+```
+
+También puedes combinarlos con otros comandos para inspeccionarlos:
+```bash
+cat .bashrc
+less .gitconfig
+```
+
+**Ejemplo práctico:**  
+Visualizar el archivo de configuración del shell del usuario:
+```bash
+cat ~/.bashrc
+```
+
+---
 
