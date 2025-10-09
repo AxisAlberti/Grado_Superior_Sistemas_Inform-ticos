@@ -2,11 +2,6 @@
 - 
 
 
-## 5. Visualización y edición básica de archivos
-- 5.1 Comandos para mostrar contenido (`cat`, `less`, `more`)
-- 5.2 Edición rápida con `nano` y consulta con `head`/`tail`
-- 5.3 Visualización de archivos ocultos
-
 ## 6. Permisos y propietarios
 - 6.1 Permisos básicos: lectura, escritura, ejecución
 - 6.2 Cambiar permisos: `chmod`
@@ -1142,6 +1137,174 @@ Visualizar el archivo de configuración del shell del usuario:
 ```bash
 cat ~/.bashrc
 ```
+
+---
+
+## 6. Permisos y propietarios
+
+El sistema Linux gestiona la seguridad de los archivos mediante **permisos** y **propietarios**.  
+Cada archivo o directorio tiene asignado un **usuario propietario**, un **grupo** y un conjunto de **permisos** que determinan quién puede leer, escribir o ejecutar su contenido.
+
+Comprender cómo funcionan los permisos es fundamental para trabajar en entornos de desarrollo, servidores web y proyectos colaborativos.
+
+---
+
+### 6.1 Permisos básicos: lectura, escritura, ejecución
+
+Cada archivo o directorio en Linux tiene tres tipos de permisos:
+
+| Permiso | Símbolo | Descripción |
+|----------|----------|-------------|
+| Lectura | `r` | Permite visualizar el contenido de un archivo o listar los archivos de un directorio. |
+| Escritura | `w` | Permite modificar el archivo o añadir/eliminar archivos dentro de un directorio. |
+| Ejecución | `x` | Permite ejecutar un archivo (si es un programa o script) o acceder a un directorio. |
+
+Estos permisos se aplican a **tres niveles de usuarios**:
+
+| Nivel | Descripción |
+|-------|--------------|
+| Usuario (u) | El propietario del archivo. |
+| Grupo (g) | Los usuarios pertenecientes al mismo grupo. |
+| Otros (o) | Todos los demás usuarios del sistema. |
+
+#### Ejemplo práctico
+
+Salida de `ls -l`:
+```
+-rwxr-xr-- 1 alumno desarrolladores 2456 oct 10 09:21 script.sh
+```
+
+Significado:
+- `-` → archivo regular (una `d` indicaría un directorio).
+- `rwx` → permisos del **usuario**: lectura, escritura y ejecución.
+- `r-x` → permisos del **grupo**: lectura y ejecución.
+- `r--` → permisos de **otros**: solo lectura.
+
+Estructura:  
+`[tipo][usuario][grupo][otros]` → `-rwxr-xr--`
+
+---
+
+### 6.2 Cambiar permisos: `chmod`
+
+El comando `chmod` permite **modificar los permisos** de archivos y directorios.  
+Existen dos modos de uso: **simbólico** y **numérico**.
+
+#### Modo simbólico
+
+Utiliza letras para representar usuario (`u`), grupo (`g`), otros (`o`) y todos (`a`).  
+Los operadores son `+` (añadir), `-` (quitar) y `=` (asignar exactamente).
+
+| Ejemplo | Descripción |
+|----------|-------------|
+| `chmod u+x script.sh` | Añade permiso de ejecución al usuario. |
+| `chmod g-w datos.txt` | Quita permiso de escritura al grupo. |
+| `chmod o=r archivo.txt` | Da solo lectura a otros. |
+| `chmod a+x instalador.sh` | Permite ejecución a todos los usuarios. |
+
+#### Modo numérico
+
+Cada permiso tiene un valor numérico:
+- Lectura (`r`) = 4  
+- Escritura (`w`) = 2  
+- Ejecución (`x`) = 1  
+
+La suma de estos valores define los permisos para cada grupo.
+
+| Comando | Permisos | Descripción |
+|----------|-----------|-------------|
+| `chmod 755 script.sh` | `rwxr-xr-x` | Usuario total, grupo y otros lectura/ejecución. |
+| `chmod 644 index.html` | `rw-r--r--` | Propietario puede escribir, los demás solo leer. |
+| `chmod 700 backup.sh` | `rwx------` | Solo el propietario tiene acceso. |
+
+#### Cambios recursivos
+
+Para aplicar permisos a todos los archivos de un directorio y sus subcarpetas:
+```bash
+chmod -R 755 /var/www/html
+```
+
+---
+
+### 6.3 Cambiar propietario y grupo: `chown`, `chgrp`
+
+Cada archivo tiene un **usuario propietario** y un **grupo** asociado.  
+Estos valores determinan quién tiene control sobre el recurso.
+
+#### Comando `chown`
+
+Permite **cambiar el propietario** y, opcionalmente, el grupo de un archivo.
+
+```bash
+sudo chown usuario:grupo archivo
+```
+
+Ejemplos:
+```bash
+sudo chown alumno:desarrolladores proyecto.py
+sudo chown -R www-data:www-data /var/www/miweb
+```
+
+La opción `-R` aplica el cambio de forma recursiva en directorios.
+
+#### Comando `chgrp`
+
+Cambia **solo el grupo** de un archivo o carpeta.
+
+```bash
+sudo chgrp desarrolladores index.html
+```
+
+También puede aplicarse recursivamente:
+```bash
+sudo chgrp -R alumnos /home/alumnos/
+```
+
+#### Ejemplo práctico (proyecto web)
+
+Supongamos un directorio de proyecto:
+```
+/var/www/html/miweb
+```
+
+Asignamos el propietario al usuario actual y el grupo al servidor web:
+```bash
+sudo chown -R $USER:www-data /var/www/html/miweb
+sudo chmod -R 775 /var/www/html/miweb
+```
+
+Esto permite que el desarrollador edite los archivos y que Apache pueda leerlos y ejecutarlos.
+
+---
+
+### 6.4 Comando `stat` para detalles avanzados
+
+El comando `stat` muestra **información detallada** sobre un archivo o directorio, más allá de lo que `ls -l` puede ofrecer.
+
+```bash
+stat archivo.txt
+```
+
+Salida de ejemplo:
+```
+  File: archivo.txt
+  Size: 1248       Blocks: 8          IO Block: 4096   regular file
+Device: 803h/2051d Inode: 1679508     Links: 1
+Access: (0644/-rw-r--r--)  Uid: (1000/alumno)   Gid: (1001/desarrolladores)
+Access: 2025-10-09 09:25:10.000000000 +0200
+Modify: 2025-10-09 09:24:00.000000000 +0200
+Change: 2025-10-09 09:24:00.000000000 +0200
+```
+
+Interpretación:
+- **File**: nombre del archivo.  
+- **Size**: tamaño en bytes.  
+- **Inode**: identificador único dentro del sistema de archivos.  
+- **Access (0644)**: permisos en formato octal y simbólico.  
+- **Uid / Gid**: usuario y grupo propietario.  
+- **Access / Modify / Change**: fechas de último acceso, modificación y cambio de metadatos.
+
+Este comando resulta muy útil para depurar problemas de permisos, comprobar propietarios o validar la configuración de directorios en proyectos web.
 
 ---
 
