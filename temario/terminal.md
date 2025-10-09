@@ -1,5 +1,6 @@
-<center>**Iniciación a la Terminal y Gestión de Archivos en Linux**</center>
-
+<center>
+**Iniciación a la Terminal y Gestión de Archivos en Linux**
+</center>
 
 # 1. Terminal
 
