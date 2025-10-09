@@ -2,11 +2,6 @@
 - 
 
 
-## 6. Permisos y propietarios
-- 6.1 Permisos básicos: lectura, escritura, ejecución
-- 6.2 Cambiar permisos: `chmod`
-- 6.3 Cambiar propietario y grupo: `chown`, `chgrp`
-- 6.4 Comando `stat` para detalles avanzados
 
 ## 7. Búsqueda y gestión avanzada
 - 7.1 Buscar archivos y carpetas: `find`, `locate`
@@ -1307,4 +1302,207 @@ Interpretación:
 Este comando resulta muy útil para depurar problemas de permisos, comprobar propietarios o validar la configuración de directorios en proyectos web.
 
 ---
+
+## 7. Búsqueda y gestión avanzada
+
+En sistemas Linux, la terminal ofrece potentes herramientas para **localizar archivos**, **buscar contenido dentro de ellos** y **comprimir o descomprimir información**.  
+Estas funciones son esenciales en el desarrollo web, donde es común gestionar múltiples proyectos, registros (logs) y estructuras complejas de carpetas.
+
+---
+
+### 7.1 Buscar archivos y carpetas: `find`, `locate`
+
+#### `find` — Búsqueda detallada en tiempo real
+
+El comando `find` permite **buscar archivos y directorios** según múltiples criterios: nombre, tipo, tamaño, permisos, propietario, fecha de modificación, etc.
+
+```bash
+find [ruta_inicial] [condición] [acción]
+```
+
+**Ejemplos básicos:**
+
+| Comando | Descripción |
+|----------|--------------|
+| `find /home -name index.html` | Busca el archivo `index.html` en todo `/home`. |
+| `find . -type d -name "img"` | Busca directorios llamados `img` en el directorio actual. |
+| `find /var/www -type f -iname "*.php"` | Busca archivos PHP ignorando mayúsculas/minúsculas. |
+| `find . -size +10M` | Archivos mayores de 10 MB. |
+| `find . -mtime -2` | Archivos modificados en los últimos 2 días. |
+| `find . -perm 755` | Archivos con permisos `755`. |
+
+**Acciones comunes:**
+```bash
+find . -name "*.log" -delete         # Elimina todos los .log
+find . -name "*.bak" -exec rm {} \;  # Ejecuta un comando sobre cada resultado
+find . -type f -exec chmod 644 {} \; # Cambia permisos a todos los archivos encontrados
+```
+
+**Explicación:**
+- `{}` → representa cada archivo encontrado.
+- `\;` → indica el final del comando que se ejecutará.
+
+---
+
+#### `locate` — Búsqueda rápida mediante base de datos
+
+A diferencia de `find`, el comando `locate` utiliza una base de datos previamente indexada, lo que hace las búsquedas **mucho más rápidas**, aunque no detecta archivos creados muy recientemente hasta que se actualiza el índice.
+
+Instalación (si no está disponible):
+```bash
+sudo apt install mlocate -y
+```
+
+Actualizar la base de datos:
+```bash
+sudo updatedb
+```
+
+Uso básico:
+```bash
+locate index.html
+locate .conf
+locate /var/www
+```
+
+**Ventaja:** velocidad.  
+**Desventaja:** no muestra resultados de archivos recién creados hasta actualizar el índice.
+
+---
+
+### 7.2 Buscar contenido de archivos: `grep`
+
+El comando `grep` busca **patrones de texto dentro de archivos**. Es una herramienta imprescindible para desarrolladores, ya que permite localizar fragmentos de código, errores o configuraciones específicas.
+
+**Sintaxis:**
+```bash
+grep [opciones] "patrón" archivo
+```
+
+**Ejemplos:**
+| Comando | Descripción |
+|----------|--------------|
+| `grep "function" index.js` | Muestra las líneas que contienen “function”. |
+| `grep -i "error" log.txt` | Ignora mayúsculas y minúsculas. |
+| `grep -n "main" *.py` | Muestra el número de línea donde aparece “main” en archivos `.py`. |
+| `grep -r "fetch" /var/www` | Busca recursivamente en todos los subdirectorios. |
+| `grep -v "#" config.txt` | Muestra líneas que **no** contienen el carácter `#`. |
+
+**Opciones útiles:**
+
+| Opción | Descripción |
+|---------|--------------|
+| `-i` | Ignora mayúsculas/minúsculas. |
+| `-r` | Búsqueda recursiva. |
+| `-n` | Muestra número de línea. |
+| `-v` | Excluye coincidencias. |
+| `--color=auto` | Resalta coincidencias en color. |
+
+**Ejemplo práctico:**  
+Buscar errores en un log de Apache:
+```bash
+grep -i "error" /var/log/apache2/error.log
+```
+
+Buscar una palabra dentro de todos los archivos de un proyecto web:
+```bash
+grep -r --color=auto "login" /var/www/miweb
+```
+
+---
+
+### 7.3 Compresión y descompresión: `tar`, `gzip`, `zip`, `unzip`
+
+En entornos de desarrollo, es común **comprimir proyectos** para hacer copias de seguridad o transferirlos. Linux dispone de varias utilidades para ello.
+
+#### `tar` — Empaquetar y comprimir
+
+`tar` (tape archive) se usa para **empaquetar múltiples archivos en uno solo**.  
+Por sí mismo no comprime, pero puede combinarse con `gzip` o `bzip2`.
+
+**Comprimir una carpeta:**
+```bash
+tar -czvf copia.tar.gz proyecto/
+```
+**Descomprimir:**
+```bash
+tar -xzvf copia.tar.gz
+```
+
+**Explicación de opciones:**
+| Opción | Descripción |
+|---------|--------------|
+| `-c` | Crear un nuevo archivo. |
+| `-x` | Extraer archivos. |
+| `-z` | Usar compresión gzip. |
+| `-v` | Mostrar progreso (verbose). |
+| `-f` | Especificar el nombre del archivo resultante. |
+
+**Ejemplo práctico:**
+```bash
+tar -czvf backup_$(date +%F).tar.gz /var/www/html
+```
+
+Crea un archivo comprimido con la fecha actual en su nombre.
+
+---
+
+#### `gzip` — Compresión de un único archivo
+
+Comprime archivos individuales reemplazando su extensión por `.gz`.
+
+```bash
+gzip datos.csv
+```
+Descomprimir:
+```bash
+gunzip datos.csv.gz
+```
+
+**Comprimir varios archivos a la vez:**
+```bash
+gzip *.log
+```
+
+**Ver tamaño antes y después:**
+```bash
+ls -lh datos.csv*
+```
+
+---
+
+#### `zip` y `unzip` — Formato compatible con Windows
+
+`zip` es muy utilizado para intercambiar archivos con usuarios de Windows o entornos mixtos.
+
+**Comprimir:**
+```bash
+zip proyecto.zip index.html css/ js/
+```
+
+**Descomprimir:**
+```bash
+unzip proyecto.zip -d proyecto_descomprimido/
+```
+
+**Otras opciones:**
+| Opción | Descripción |
+|---------|--------------|
+| `-r` | Compresión recursiva (incluye subdirectorios). |
+| `-9` | Máximo nivel de compresión. |
+| `-q` | Modo silencioso. |
+
+**Ejemplo:**  
+Comprimir todo un proyecto web:
+```bash
+zip -r9 miweb.zip /var/www/miweb
+```
+
+Descomprimirlo en una carpeta nueva:
+```bash
+unzip miweb.zip -d ~/Documentos/
+```
+
+---
+
 
