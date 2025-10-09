@@ -1,28 +1,7 @@
-
-- 
-
+**Iniciación a la Terminal y Gestión de Archivos en Linux**
 
 
-## 7. Búsqueda y gestión avanzada
-- 7.1 Buscar archivos y carpetas: `find`, `locate`
-- 7.2 Buscar contenido de archivos: `grep`
-- 7.3 Compresión y descompresión: `tar`, `gzip`, `zip`, `unzip`
-
-## 8. Buenas prácticas y seguridad en la gestión de archivos
-- 8.1 Prevención del borrado y backups básicos
-- 8.2 Comandos peligrosos y cómo evitar errores graves
-
-## 9. Gestión de software y repositorios
-- 9.1 ¿Qué son los repositorios de software?
-- 9.2 Añadir, listar y actualizar repositorios (`apt`, `dnf`, `yum`, `zypper`)
-- 9.3 Instalación y desinstalación de paquetes (`apt install`, `apt remove`, `dnf install`, `yum install`, `zypper install`)
-- 9.4 Actualización de paquetes y del sistema (`apt update`, `apt upgrade`, `dnf upgrade`)
-- 9.5 Búsqueda de paquetes disponibles (`apt search`, `dnf search`, `yum search`)
-- 9.6 Comandos para consultar información de paquetes (`apt show`, `dnf info`, `yum info`)
-
----
-
-*Actualizado octubre 2025*
+# 1. Terminal
 
 ## 1.1 ¿Qué es la terminal y por qué usarla?
 
@@ -1505,4 +1484,464 @@ unzip miweb.zip -d ~/Documentos/
 
 ---
 
+## 7. Búsqueda y gestión avanzada
+
+En sistemas Linux, la terminal ofrece potentes herramientas para **localizar archivos**, **buscar contenido dentro de ellos** y **comprimir o descomprimir información**.  
+Estas funciones son esenciales en el desarrollo web, donde es común gestionar múltiples proyectos, registros (logs) y estructuras complejas de carpetas.
+
+---
+
+### 7.1 Buscar archivos y carpetas: `find`, `locate`
+
+#### `find` — Búsqueda detallada en tiempo real
+
+El comando `find` permite **buscar archivos y directorios** según múltiples criterios: nombre, tipo, tamaño, permisos, propietario, fecha de modificación, etc.
+
+```bash
+find [ruta_inicial] [condición] [acción]
+```
+
+**Ejemplos básicos:**
+
+| Comando | Descripción |
+|----------|--------------|
+| `find /home -name index.html` | Busca el archivo `index.html` en todo `/home`. |
+| `find . -type d -name "img"` | Busca directorios llamados `img` en el directorio actual. |
+| `find /var/www -type f -iname "*.php"` | Busca archivos PHP ignorando mayúsculas/minúsculas. |
+| `find . -size +10M` | Archivos mayores de 10 MB. |
+| `find . -mtime -2` | Archivos modificados en los últimos 2 días. |
+| `find . -perm 755` | Archivos con permisos `755`. |
+
+**Acciones comunes:**
+```bash
+find . -name "*.log" -delete         # Elimina todos los .log
+find . -name "*.bak" -exec rm {} \;  # Ejecuta un comando sobre cada resultado
+find . -type f -exec chmod 644 {} \; # Cambia permisos a todos los archivos encontrados
+```
+
+**Explicación:**
+- `{}` → representa cada archivo encontrado.
+- `\;` → indica el final del comando que se ejecutará.
+
+---
+
+#### `locate` — Búsqueda rápida mediante base de datos
+
+A diferencia de `find`, el comando `locate` utiliza una base de datos previamente indexada, lo que hace las búsquedas **mucho más rápidas**, aunque no detecta archivos creados muy recientemente hasta que se actualiza el índice.
+
+Instalación (si no está disponible):
+```bash
+sudo apt install mlocate -y
+```
+
+Actualizar la base de datos:
+```bash
+sudo updatedb
+```
+
+Uso básico:
+```bash
+locate index.html
+locate .conf
+locate /var/www
+```
+
+**Ventaja:** velocidad.  
+**Desventaja:** no muestra resultados de archivos recién creados hasta actualizar el índice.
+
+---
+
+### 7.2 Buscar contenido de archivos: `grep`
+
+El comando `grep` busca **patrones de texto dentro de archivos**. Es una herramienta imprescindible para desarrolladores, ya que permite localizar fragmentos de código, errores o configuraciones específicas.
+
+**Sintaxis:**
+```bash
+grep [opciones] "patrón" archivo
+```
+
+**Ejemplos:**
+| Comando | Descripción |
+|----------|--------------|
+| `grep "function" index.js` | Muestra las líneas que contienen “function”. |
+| `grep -i "error" log.txt` | Ignora mayúsculas y minúsculas. |
+| `grep -n "main" *.py` | Muestra el número de línea donde aparece “main” en archivos `.py`. |
+| `grep -r "fetch" /var/www` | Busca recursivamente en todos los subdirectorios. |
+| `grep -v "#" config.txt` | Muestra líneas que **no** contienen el carácter `#`. |
+
+**Opciones útiles:**
+
+| Opción | Descripción |
+|---------|--------------|
+| `-i` | Ignora mayúsculas/minúsculas. |
+| `-r` | Búsqueda recursiva. |
+| `-n` | Muestra número de línea. |
+| `-v` | Excluye coincidencias. |
+| `--color=auto` | Resalta coincidencias en color. |
+
+**Ejemplo práctico:**  
+Buscar errores en un log de Apache:
+```bash
+grep -i "error" /var/log/apache2/error.log
+```
+
+Buscar una palabra dentro de todos los archivos de un proyecto web:
+```bash
+grep -r --color=auto "login" /var/www/miweb
+```
+
+---
+
+### 7.3 Compresión y descompresión: `tar`, `gzip`, `zip`, `unzip`
+
+En entornos de desarrollo, es común **comprimir proyectos** para hacer copias de seguridad o transferirlos. Linux dispone de varias utilidades para ello.
+
+#### `tar` — Empaquetar y comprimir
+
+`tar` (tape archive) se usa para **empaquetar múltiples archivos en uno solo**.  
+Por sí mismo no comprime, pero puede combinarse con `gzip` o `bzip2`.
+
+**Comprimir una carpeta:**
+```bash
+tar -czvf copia.tar.gz proyecto/
+```
+**Descomprimir:**
+```bash
+tar -xzvf copia.tar.gz
+```
+
+**Explicación de opciones:**
+| Opción | Descripción |
+|---------|--------------|
+| `-c` | Crear un nuevo archivo. |
+| `-x` | Extraer archivos. |
+| `-z` | Usar compresión gzip. |
+| `-v` | Mostrar progreso (verbose). |
+| `-f` | Especificar el nombre del archivo resultante. |
+
+**Ejemplo práctico:**
+```bash
+tar -czvf backup_$(date +%F).tar.gz /var/www/html
+```
+
+Crea un archivo comprimido con la fecha actual en su nombre.
+
+---
+
+#### `gzip` — Compresión de un único archivo
+
+Comprime archivos individuales reemplazando su extensión por `.gz`.
+
+```bash
+gzip datos.csv
+```
+Descomprimir:
+```bash
+gunzip datos.csv.gz
+```
+
+**Comprimir varios archivos a la vez:**
+```bash
+gzip *.log
+```
+
+**Ver tamaño antes y después:**
+```bash
+ls -lh datos.csv*
+```
+
+---
+
+#### `zip` y `unzip` — Formato compatible con Windows
+
+`zip` es muy utilizado para intercambiar archivos con usuarios de Windows o entornos mixtos.
+
+**Comprimir:**
+```bash
+zip proyecto.zip index.html css/ js/
+```
+
+**Descomprimir:**
+```bash
+unzip proyecto.zip -d proyecto_descomprimido/
+```
+
+**Otras opciones:**
+| Opción | Descripción |
+|---------|--------------|
+| `-r` | Compresión recursiva (incluye subdirectorios). |
+| `-9` | Máximo nivel de compresión. |
+| `-q` | Modo silencioso. |
+
+**Ejemplo:**  
+Comprimir todo un proyecto web:
+```bash
+zip -r9 miweb.zip /var/www/miweb
+```
+
+Descomprimirlo en una carpeta nueva:
+```bash
+unzip miweb.zip -d ~/Documentos/
+```
+
+---
+
+## 9. Gestión de software y repositorios
+
+En los sistemas Linux modernos, la instalación y actualización de programas se realiza a través de **repositorios de software**, que contienen miles de paquetes mantenidos por la comunidad o por los desarrolladores oficiales de cada distribución.  
+Comprender cómo funcionan los **gestores de paquetes** es fundamental para administrar entornos de desarrollo, instalar dependencias y mantener el sistema actualizado y seguro.
+
+---
+
+### 9.1 ¿Qué son los repositorios de software?
+
+Un **repositorio** es una ubicación (local o remota) donde se almacenan los **paquetes de software** y sus **metadatos**.  
+Cada paquete contiene los archivos binarios, documentación y dependencias necesarias para que un programa funcione correctamente.
+
+En Linux, cada distribución utiliza su propio gestor de paquetes y formato:
+
+| Distribución | Gestor | Extensión de paquete |
+|---------------|---------|----------------------|
+| Debian / Ubuntu | `APT` (Advanced Package Tool) | `.deb` |
+| Fedora / Red Hat / CentOS | `DNF` o `YUM` | `.rpm` |
+| openSUSE | `Zypper` | `.rpm` |
+
+**Ventajas del uso de repositorios:**
+- Seguridad: los paquetes están verificados y firmados digitalmente.
+- Comodidad: resuelven automáticamente dependencias.
+- Actualizaciones centralizadas y automatizadas.
+- Posibilidad de añadir repositorios externos (por ejemplo, para Node.js, Docker o VS Code).
+
+Los repositorios configurados se encuentran generalmente en:
+```
+/etc/apt/sources.list
+/etc/apt/sources.list.d/
+```
+
+---
+
+### 9.2 Añadir, listar y actualizar repositorios (`apt`, `dnf`, `yum`, `zypper`)
+
+#### En sistemas Debian/Ubuntu (APT)
+
+**Listar repositorios activos:**
+```bash
+cat /etc/apt/sources.list
+ls /etc/apt/sources.list.d/
+```
+
+**Añadir un repositorio:**
+```bash
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+```
+
+**Actualizar la lista de paquetes disponibles:**
+```bash
+sudo apt update
+```
+
+#### En sistemas Fedora, RHEL o CentOS (DNF / YUM)
+
+**Listar repositorios configurados:**
+```bash
+dnf repolist
+yum repolist
+```
+
+**Añadir repositorio:**
+```bash
+sudo dnf config-manager --add-repo=https://repo.example.com/repo.repo
+```
+
+**Actualizar metadatos:**
+```bash
+sudo dnf makecache
+```
+
+#### En openSUSE (Zypper)
+
+**Listar repositorios:**
+```bash
+zypper repos
+```
+
+**Añadir repositorio:**
+```bash
+sudo zypper addrepo https://download.opensuse.org/repositories/devel:/languages:/python/openSUSE_Leap_15.4/ python-repo
+```
+
+**Actualizar lista de paquetes:**
+```bash
+sudo zypper refresh
+```
+
+---
+
+### 9.3 Instalación y desinstalación de paquetes
+
+#### Instalar software (APT)
+
+```bash
+sudo apt install apache2
+sudo apt install python3-pip
+```
+
+#### Eliminar software
+
+```bash
+sudo apt remove apache2
+```
+
+**Eliminar completamente (incluyendo configuraciones):**
+```bash
+sudo apt purge apache2
+```
+
+**Eliminar dependencias no utilizadas:**
+```bash
+sudo apt autoremove
+```
+
+#### En Fedora/CentOS (DNF / YUM)
+
+```bash
+sudo dnf install httpd
+sudo dnf remove httpd
+```
+
+#### En openSUSE (Zypper)
+
+```bash
+sudo zypper install nginx
+sudo zypper remove nginx
+```
+
+---
+
+### 9.4 Actualización de paquetes y del sistema
+
+#### En Debian/Ubuntu
+
+**Actualizar lista de paquetes:**
+```bash
+sudo apt update
+```
+
+**Actualizar todos los paquetes instalados:**
+```bash
+sudo apt upgrade
+```
+
+**Actualización completa del sistema (incluye dependencias y kernel):**
+```bash
+sudo apt full-upgrade
+```
+
+#### En Fedora/CentOS
+
+```bash
+sudo dnf upgrade
+```
+
+**Equivalente en sistemas más antiguos:**
+```bash
+sudo yum update
+```
+
+#### En openSUSE
+
+```bash
+sudo zypper update
+```
+
+**Actualizar el sistema completo:**
+```bash
+sudo zypper dist-upgrade
+```
+
+---
+
+### 9.5 Búsqueda de paquetes disponibles
+
+Buscar software en los repositorios es una tarea habitual para desarrolladores, especialmente al instalar herramientas de programación.
+
+#### APT
+
+```bash
+apt search nginx
+apt search python3
+```
+
+#### DNF / YUM
+
+```bash
+dnf search php
+yum search mysql
+```
+
+#### Zypper
+
+```bash
+zypper search nodejs
+```
+
+**Ejemplo práctico:**  
+Buscar el paquete para instalar el intérprete de Python:
+```bash
+apt search python3
+```
+
+Resultado parcial:
+```
+python3/focal,now 3.8.10-0ubuntu1~20.04.13 amd64 [instalado]
+  Interactive high-level object-oriented language (default python3 version)
+```
+
+---
+
+### 9.6 Comandos para consultar información de paquetes
+
+Cada gestor permite obtener **detalles técnicos** sobre los paquetes: versión, dependencias, tamaño, repositorio de origen, etc.
+
+#### APT
+
+```bash
+apt show apache2
+```
+
+Salida de ejemplo:
+```
+Package: apache2
+Version: 2.4.41-4ubuntu3.21
+Description: Apache HTTP Server
+Homepage: https://httpd.apache.org/
+Dependencies: libc6, perl, mime-support
+```
+
+#### DNF / YUM
+
+```bash
+dnf info nginx
+yum info php
+```
+
+#### Zypper
+
+```bash
+zypper info nodejs
+```
+
+**Ejemplo práctico:**  
+Comprobar información sobre Git en Ubuntu:
+```bash
+apt show git
+```
+
+**Ver dependencias de un paquete:**
+```bash
+apt depends python3-pip
+```
+
+---
 
