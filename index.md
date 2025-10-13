@@ -6,9 +6,6 @@ nav_order: 1
 # Módulo: Sistemas Informáticos
 ## Ciclo Formativo: Técnico Superior en Desarrollo de Aplicaciones Web
 
----
-
-[0. **Terminal Sistemas Linux**](../temario/terminal.md)
 
 ---
 
