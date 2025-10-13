@@ -1,13 +1,22 @@
-/* --- Just the Docs: forzar que el logo se vea y agrandarlo (~3cm) --- */
-.site-title img,
+/* Usa el slot de logo del header (izquierda) y ajústalo ~3 cm (~112px) */
 .site-logo {
   display: inline-block !important;
-  height: 112px !important;  /* ≈3 cm en pantalla */
+  height: 112px !important;
+  width: auto !important;
+  max-height: none !important;
+  vertical-align: middle;
+}
+
+/* Compatibilidad con versiones donde el <img> va bajo .site-title */
+.site-title img {
+  height: 112px !important;
   width: auto !important;
   max-height: none !important;
 }
 
-/* Si el header quedara "aplastado", descomenta: */
-/*
-.site-header { padding-top: .25rem; padding-bottom: .25rem; }
-*/
+/* Alinea logo + texto y deja un poco de separación */
+.site-header .site-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
