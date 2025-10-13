@@ -1,1 +1,7 @@
-
+/* Aumentar el tamaño del logo en el header de Just the Docs */
+.site-title img,
+.site-logo {
+  height: 64px;     /* prueba 48, 56, 64… */
+  width: auto;
+  max-height: none;
+}
