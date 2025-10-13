@@ -8,7 +8,8 @@ nav_order: 1
 
 
 ---
-
+![Test 1]({{ "/assets/logo.png" | relative_url }})
+![Test 2]({{ site.baseurl }}/assets/logo.png)
 ## Descripción general
 
 El módulo de **Sistemas Informáticos** está diseñado específicamente para estudiantes de desarrollo web y aplicaciones, y está profundamente orientado a la **programación** y al contexto profesional del programador. Entender bien los sistemas informáticos permite comprender el entorno donde se ejecutan las aplicaciones, optimizar su desarrollo y anticipar problemas reales.
