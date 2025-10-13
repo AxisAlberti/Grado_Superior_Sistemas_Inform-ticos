@@ -15,3 +15,13 @@
   width: auto;
   max-height: none;
 }
+
+/* Sidebar más estrecha en pantallas anchas */
+@media (min-width: 768px) {
+  .side-bar {        /* ancho de la barra */
+    width: 220px;    /* prueba 200–240px */
+  }
+  .main {            /* corrige el desplazamiento del contenido */
+    margin-left: 220px;
+  }
+}
