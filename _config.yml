@@ -9,7 +9,7 @@ plugins:
 baseurl: "/Grado_Superior_Sistemas_Inform-ticos"
 
 # Interfaz
-logo: "/assets/logo.png"
+logo: /assets/logo.png
 
 # Si quieres mostrar un enlace al repo en la cabecera, descomenta y pon tu usuario:
 # aux_links:
