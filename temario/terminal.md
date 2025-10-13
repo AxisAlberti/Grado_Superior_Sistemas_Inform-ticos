@@ -1,3 +1,11 @@
+---
+layout: default
+title: Terminal Sistemas Linux
+nav_order: 0
+---
+
+
+
 # Índice General
 
 1. [Terminal](#1-terminal)
