@@ -3,6 +3,10 @@
 
 ---
 
+[Terminal Sistemas Linux](temario/recursos/red/esquema.pdf)
+
+---
+
 ## Descripción general
 
 El módulo de **Sistemas Informáticos** está diseñado específicamente para estudiantes de desarrollo web y aplicaciones, y está profundamente orientado a la **programación** y al contexto profesional del programador. Entender bien los sistemas informáticos permite comprender el entorno donde se ejecutan las aplicaciones, optimizar su desarrollo y anticipar problemas reales.
