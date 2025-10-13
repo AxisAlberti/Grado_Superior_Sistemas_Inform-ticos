@@ -3,7 +3,7 @@
 
 ---
 
-[Terminal Sistemas Linux](temario/recursos/red/esquema.pdf)
+[Terminal Sistemas Linux](temario/terminal.md)
 
 ---
 
