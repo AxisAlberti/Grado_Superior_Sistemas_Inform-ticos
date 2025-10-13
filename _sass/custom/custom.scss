@@ -1,7 +1,7 @@
-/* Aumentar el tamaño del logo en el header de Just the Docs */
+/* ~3 cm en pantalla (~112–114px) */
 .site-title img,
 .site-logo {
-  height: 64px;     /* prueba 48, 56, 64… */
-  width: auto;
+  height: 112px;   /* prueba 114px si la ves un pelín pequeña */
+  width: 112px;    /* solo si tu logo es perfectamente cuadrado; si no, usa width:auto */
   max-height: none;
 }
