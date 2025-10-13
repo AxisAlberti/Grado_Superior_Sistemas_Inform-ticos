@@ -3,7 +3,7 @@
 
 ---
 
-[Terminal Sistemas Linux](temario/terminal.md)
+[0. **Terminal Sistemas Linux**](../temario/terminal.md)
 
 ---
 
