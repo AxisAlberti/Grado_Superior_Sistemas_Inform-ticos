@@ -1,19 +1,1 @@
 
-/* ~3 cm en pantalla (~112–114px) */
-.site-title img,
-.site-logo {
-  height: 112px;   /* prueba 114px si la ves un pelín pequeña */
-  width: 112px;    /* solo si tu logo es perfectamente cuadrado; si no, usa width:auto */
-  max-height: none;
-}
-
-
-/* Sidebar más estrecha en pantallas anchas */
-@media (min-width: 768px) {
-  .side-bar {        /* ancho de la barra */
-    width: 220px;    /* prueba 200–240px */
-  }
-  .main {            /* corrige el desplazamiento del contenido */
-    margin-left: 220px;
-  }
-}
