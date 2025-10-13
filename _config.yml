@@ -1,0 +1,13 @@
+title: "Apuntes SMR"
+description: "Temario y recursos"
+# Si es un "project site" (no usuario.github.io):
+baseurl: "/NOMBRE_DEL_REPO"  # quítalo si es usuario.github.io
+remote_theme: just-the-docs/just-the-docs
+plugins:
+  - jekyll-remote-theme
+
+# Opcionales de Just the Docs
+logo: /assets/logo.png
+aux_links:
+  "Ver en GitHub":
+    - "https://github.com/usuario/NOMBRE_DEL_REPO"
