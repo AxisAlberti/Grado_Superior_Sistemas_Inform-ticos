@@ -1,7 +1,13 @@
-/* ~3 cm en pantalla (~112–114px) */
+/* --- Just the Docs: forzar que el logo se vea y agrandarlo (~3cm) --- */
 .site-title img,
 .site-logo {
-  height: 112px;   /* prueba 114px si la ves un pelín pequeña */
-  width: 112px;    /* solo si tu logo es perfectamente cuadrado; si no, usa width:auto */
-  max-height: none;
+  display: inline-block !important;
+  height: 112px !important;  /* ≈3 cm en pantalla */
+  width: auto !important;
+  max-height: none !important;
 }
+
+/* Si el header quedara "aplastado", descomenta: */
+/*
+.site-header { padding-top: .25rem; padding-bottom: .25rem; }
+*/
