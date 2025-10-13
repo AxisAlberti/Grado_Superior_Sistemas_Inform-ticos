@@ -1,9 +1,7 @@
-{%- comment -%}
-Temporary debug: show the logo path and a fallback image in the header area.
-Remove this file once the official site.logo works.
-{%- endcomment -%}
-<div style="display:flex;align-items:center;gap:.5rem">
-  <img src="{{ site.logo | relative_url }}" alt="site.logo" style="height:56px;width:auto;max-height:none;"/>
-  <span class="fs-3">I.E.S. Rafael Alberti Cádiz</span>
+<!-- Bloque de logo inyectado en el site-header -->
+<div class="header-slot-left">
+  <a href="{{ site.baseurl }}/" aria-label="Inicio">
+    <img src="{{ '/assets/logo.png' | relative_url }}" alt="{{ site.title }} logo">
+  </a>
 </div>
 
