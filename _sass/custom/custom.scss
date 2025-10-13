@@ -1,31 +1,17 @@
-/* --- Header más alto + logo grande en el site header --- */
+/* --- Force taller header + visible big logo (~112px) --- */
 .site-header {
-  /* Aumenta el “alto” visual del header */
-  padding-top: 0.75rem;        /* sube/baja margen interno */
+  padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  min-height: 120px;           /* fuerza altura mínima del header */
-  /* opcional: marca el área mientras pruebas */
-  /* background: rgba(0,0,0,.03); */
+  min-height: 120px;
 }
 
-/* Alinea título y logo en la misma línea */
-.site-header .site-title {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;                /* separación logo-texto */
-}
+.site-title { display: flex; align-items: center; gap: .75rem; }
 
-/* Tamaño del logo (~3 cm) */
+/* Both selectors for theme variants */
 .site-logo,
 .site-title img {
-  height: 112px;               /* prueba 96/112/128 px */
+  display: inline-block;
+  height: 112px;
   width: auto;
   max-height: none;
-}
-
-/* Responsive: reduce un poco en pantallas estrechas */
-@media (max-width: 576px) {
-  .site-header { min-height: 80px; }
-  .site-logo,
-  .site-title img { height: 64px; }
 }
