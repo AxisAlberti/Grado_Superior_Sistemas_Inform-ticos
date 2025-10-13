@@ -1,1 +1,17 @@
+# --- GitHub Pages (Just the Docs) ---
+title: "Grado Superior · Sistemas Informáticos"
+description: "Apuntes y recursos — Just the Docs"
+remote_theme: just-the-docs/just-the-docs
+plugins:
+  - jekyll-remote-theme
 
+# Publicado desde la raíz del repo (project site)
+baseurl: "/Grado_Superior_Sistemas_Inform-ticos"
+
+# Interfaz
+logo: /assets/logo.png
+
+# Si quieres mostrar un enlace al repo en la cabecera, descomenta y pon tu usuario:
+# aux_links:
+#   "Ver en GitHub":
+#     - "https://github.com/TU_USUARIO/Grado_Superior_Sistemas_Inform-ticos"
