@@ -1,12 +1,11 @@
 ---
 layout: default
 title: Terminal Sistemas Linux
-nav_order: 0
+nav_order: 2
 ---
 
 
 
-# Índice General
 
 1. [Terminal](#1-terminal)
    - [1.1 ¿Qué es la terminal y por qué usarla?](#11-qué-es-la-terminal-y-por-qué-usarla)
