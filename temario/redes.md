@@ -71,6 +71,7 @@ Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresora
 
 > **Física ≠ Lógica**: una red Wi-Fi puede verse lógicamente como estrella (AP central) aunque físicamente sea radio compartida.
 
+
 ---
 
 ### Modos de comunicación
@@ -94,24 +95,6 @@ Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresora
 
 ---
 
-### Seguridad inicial (mínimos)
-- Cambiar **credenciales por defecto** de dispositivos de red.
-- Actualizar **firmware** y aplicar parches.
-- Segmentar cuando sea posible (VLAN, subredes) y usar contraseñas fuertes.
-- Copias de **configuración** y planes de recuperación.
 
----
 
-### Ejemplos cotidianos
-- **Clase/Lab:** PCs conectados a un **switch**, salida a Internet por **router** del centro, **AP** para Wi-Fi, **servidor** de ficheros y **impresora** compartida.
-- **Casa:** router del ISP con Wi-Fi, móviles/portátiles conectados, TV inteligente, impresora Wi-Fi.
 
----
-
-### Actividad rápida (diagnóstico inicial)
-1. Dibuja el **mapa** de tu red del aula o casa (nodos, switch/router, AP).
-2. Identifica **tipo de red** (LAN/WLAN) y **topología** predominante.
-3. Mide **latencia** (ping) y comenta qué aplicaciones serían sensibles al jitter.
-4. Enumera **al menos 3 servicios** de red presentes (DNS, DHCP, NTP, web).
-
-> En los siguientes apartados se profundiza en **Modelo OSI**, **TCP/IP** y **cálculo de subredes**.
