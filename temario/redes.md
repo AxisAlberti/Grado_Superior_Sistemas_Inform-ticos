@@ -71,7 +71,6 @@ Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresora
 
 > **Física ≠ Lógica**: una red Wi-Fi puede verse lógicamente como estrella (AP central) aunque físicamente sea radio compartida.
 
-topologia.webp
 
 <div style="text-align: center;">
   <img src="../imagenes/topologia.webp" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
