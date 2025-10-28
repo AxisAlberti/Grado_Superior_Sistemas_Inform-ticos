@@ -2,8 +2,8 @@
 
 # Índice — Redes 
 
-1. [Introducción a las redes](#introducción-a-las-redes)
-2. [Medios y hardware de red](#medios-y-hardware-de-red)
+1. [1. Introducción a las redes](#introducción-a-las-redes)
+2. [2. Medios y hardware de red](#medios-y-hardware-de-red)
 3. [Modelo OSI (7 capas)](#modelo-osi-7-capas)
 4. [Modelo TCP/IP](#modelo-tcpip)
 5. [Direccionamiento IPv4](#direccionamiento-ipv4)
@@ -11,7 +11,7 @@
 7. [Introducción a IPv6](#introducción-a-ipv6)
 8. [Servicios esenciales](#servicios-esenciales)
 
-## Introducción a las redes
+## 1. Introducción a las redes
 
 ### ¿Qué es una red?
 Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresoras, cámaras, IoT…) **interconectados** que **intercambian datos** y **comparten recursos** (archivos, Internet, servicios). El objetivo es **comunicar** de forma **fiable, eficiente y segura**.
@@ -169,7 +169,7 @@ Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresora
 ---
 
 
-## Medios y hardware de red
+## 2. Medios y hardware de red
 
 En este apartado se estudian los **medios físicos** (por donde viajan los datos) y los **dispositivos** que forman la infraestructura básica de una red. La idea es reconocer **qué usar**, **dónde** y **por qué**.
 
