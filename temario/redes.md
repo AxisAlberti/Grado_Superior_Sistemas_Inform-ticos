@@ -237,10 +237,19 @@ Históricamente usado en redes locales (bus). Hoy se ve sobre todo en **operador
 #### Fibra óptica
 Transmite **luz** en lugar de electricidad. Permite **altísimas velocidades** y **grandes distancias** con **inmunidad** a interferencias electromagnéticas.
 
-- **Principio**: la luz se guía dentro de un núcleo por **reflexión interna**.  
+- **Principio**: la luz se guía dentro de un núcleo por **reflexión interna**.
 - **Tipos**:
   - **Monomodo (SMF, OS1/OS2)**: un solo “camino” de luz. Ideal para **largas distancias** (kilómetros a decenas de km).  
-  - **Multimodo (MMF, OM1/OM2/OM3/OM4/OM5)**: varios “caminos”. Usado dentro de **edificios/campus**.  
+  - **Multimodo (MMF, OM1/OM2/OM3/OM4/OM5)**: varios “caminos”. Usado dentro de **edificios/campus**.
+
+---
+
+<div style="text-align: center;">
+  <img src="../imagenes/fibra.jpeg" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+</div>
+
+---
+
 - **Conectores** habituales: **LC**, **SC**.  
 - **Transceptores**: SFP/SFP+/SFP28/QSFP… (se insertan en switches/routers para elegir **velocidad** y **alcance**).
 
