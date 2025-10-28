@@ -183,9 +183,13 @@ Es el cable **Ethernet** típico con conector **RJ-45**. Está formado por pares
 - **UTP (Unshielded Twisted Pair)**: sin malla metálica. Es el más común en oficinas y aulas.  
 - **STP/FTP (Shielded/Foil Twisted Pair)**: con **apantallamiento** (malla o lámina). Se usa en entornos con más **ruido eléctrico** o tiradas largas junto a cables de potencia.
 
+---
+
 <div style="text-align: center;">
   <img src="../imagenes/utp.png" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
 </div>
+
+---
 
 
 **Categorías (ejemplos habituales)**  
@@ -212,6 +216,14 @@ Históricamente usado en redes locales (bus). Hoy se ve sobre todo en **operador
 
 - **Estructura**: conductor central, aislante, malla metálica (pantalla) y cubierta.  
 - **Tipos** (según impedancia y uso): **75 Ω** (televisión/DOCSIS), **50 Ω** (radio, antenas).
+
+---
+
+<div style="text-align: center;">
+  <img src="../imagenes/coaxial.jpeg" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+</div>
+
+---
 
 **Ventajas**  
 - Buena **inmunidad** al ruido, tiradas largas para señales específicas.
