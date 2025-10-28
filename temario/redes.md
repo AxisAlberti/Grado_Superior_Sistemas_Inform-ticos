@@ -183,6 +183,11 @@ Es el cable **Ethernet** típico con conector **RJ-45**. Está formado por pares
 - **UTP (Unshielded Twisted Pair)**: sin malla metálica. Es el más común en oficinas y aulas.  
 - **STP/FTP (Shielded/Foil Twisted Pair)**: con **apantallamiento** (malla o lámina). Se usa en entornos con más **ruido eléctrico** o tiradas largas junto a cables de potencia.
 
+<div style="text-align: center;">
+  <img src="../imagenes/uto.png" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+</div>
+
+
 **Categorías (ejemplos habituales)**  
 - **Cat5e**: hasta **1 Gb/s** (Gigabit) a **100 m**.  
 - **Cat6**: **1 Gb/s** a 100 m y **10 Gb/s** hasta ~**55 m** en condiciones típicas.  
