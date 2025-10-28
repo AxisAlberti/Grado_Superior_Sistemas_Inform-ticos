@@ -169,7 +169,7 @@ Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresora
 ---
 
 
-## 2. Medios y hardware de red
+## Medios y hardware de red
 
 En este apartado se estudian los **medios físicos** (por donde viajan los datos) y los **dispositivos** que forman la infraestructura básica de una red. La idea es reconocer **qué usar**, **dónde** y **por qué**.
 
