@@ -2,8 +2,8 @@
 
 # Índice — Redes 
 
-1. [1. Introducción a las redes](#introducción-a-las-redes)
-2. [2. Medios y hardware de red](#medios-y-hardware-de-red)
+1. [Introducción a las redes](#introducción-a-las-redes)
+2. [Medios y hardware de red](#medios-y-hardware-de-red)
 3. [Modelo OSI (7 capas)](#modelo-osi-7-capas)
 4. [Modelo TCP/IP](#modelo-tcpip)
 5. [Direccionamiento IPv4](#direccionamiento-ipv4)
