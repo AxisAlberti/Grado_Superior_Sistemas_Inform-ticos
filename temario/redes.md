@@ -83,6 +83,97 @@ Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresora
 </div>
 ---
 
+# Modos de envío en redes: Unicast, Broadcast y Multicast
+
+## 1) Unicast — *uno a uno*
+**Qué es:** Comunicación entre **un emisor** y **un receptor** concretos.  
+**Ejemplos:** Abrir una web (tu navegador ↔ servidor), enviar un correo SMTP, una petición a una API.
+
+**Cómo funciona (idea)**
+- **Capa 3 (IP):** el paquete va dirigido a **una IP destino**.
+- **Capa 2 (Ethernet):** la trama lleva **una MAC destino** concreta.
+- **Switch:** reenvía solo por el puerto donde está el receptor (si lo conoce).
+- **Router:** encamina hacia la red del destinatario.
+
+**Ventajas**
+- Eficiente cuando solo **una** máquina necesita el dato.
+- Fácil de **controlar y asegurar** (firewall, QoS por flujo).
+
+**Limitaciones**
+- Si **muchos** clientes piden **lo mismo**, el servidor repite N veces el envío (N flujos unicast).
+
+---
+
+## 2) Broadcast — *uno a todos* (en la misma red)
+**Qué es:** Un emisor envía a **todas** las máquinas de su **red local** (dominio de broadcast).  
+**Ejemplos típicos:**  
+- **ARP**: “¿Quién tiene la IP X? respóndeme tu MAC”  
+- Descubrimientos automáticos (algunos servicios locales)
+
+**Cómo funciona (idea)**
+- **IPv4:** dirección **255.255.255.255** (o broadcast de la subred).  
+- **Ethernet:** MAC destino **ff:ff:ff:ff:ff:ff** (especial “todos”).  
+- **Switch:** inunda **todos los puertos** de la VLAN (menos el de origen).  
+- **Router:** **no** reenvía broadcast a otras redes (lo **bloquea** por defecto).
+
+**Ventajas**
+- Útil para **descubrir** quién está en la red cuando aún no sabes su MAC/IP.
+
+**Riesgos / límites**
+- Si hay **mucho broadcast**, **satura** la red (broadcast storm).
+- No atraviesa routers: su alcance se limita a tu **subred/VLAN**.
+
+> Nota: **DHCP** usa broadcast para descubrir el servidor, pero a menudo el router actúa como **relay** para “traspasar” la petición a otra red.
+
+---
+
+## 3) Multicast — *uno a muchos interesados*
+**Qué es:** Un emisor envía **un solo flujo** y **varios receptores** que **se apuntan** a un “grupo” lo reciben. Es “uno a muchos”, **pero solo a quienes se suscriben**.
+
+**Ejemplos típicos**
+- Vídeo en directo/streaming corporativo a muchas aulas.
+- Conferencias o distribución de datos en tiempo real.
+
+**Cómo funciona (idea suave)**
+- **IPv4:** direcciones **224.0.0.0–239.255.255.255** (rango multicast).
+- **IPv6:** **ff00::/8**.
+- Los receptores se **suscriben** al grupo (protocolo **IGMP** en IPv4 / **MLD** en IPv6).
+- **Switches** con *IGMP snooping* aprenden **qué puertos** quieren ese grupo y **evitan inundar** toda la red.
+- **Routers** pueden usar **PIM** para distribuir el tráfico entre redes si hace falta (detalle avanzado).
+
+**Ventajas**
+- Muy **eficiente** cuando **muchos** clientes necesitan **el mismo** contenido: el emisor solo manda **una vez**.
+
+**Limitaciones**
+- Requiere **soporte** de la red (IGMP/MLD, IGMP snooping, a veces configuración en routers).
+- No todos los entornos/ISPs permiten multicast más allá de la red local sin configuración específica.
+
+---
+
+## Comparativa rápida
+
+| Modo        | Destino            | Alcance por defecto        | Ejemplos                       | Pros                               | Contras                                  |
+|-------------|--------------------|----------------------------|---------------------------------|-------------------------------------|-------------------------------------------|
+| **Unicast** | 1 receptor         | Enrutado entre redes       | Navegar web, API, email         | Sencillo, controlable               | Poco eficiente si hay muchos receptores   |
+| **Broadcast** | Todos en la subred | **Solo** la subred/VLAN    | ARP, descubrimiento local       | Descubrimiento rápido               | Puede saturar; no cruza routers           |
+| **Multicast** | Varios suscritos   | Subred y (opcional) entre redes | Streaming, avisos simultáneos | Un envío para muchos (eficiente)    | Requiere soporte/configuración de red     |
+
+---
+
+## Mini-ejemplos “mentales”
+
+- **Unicast:** Tu PC → servidor web: *“Dame /index.html”* → Solo el servidor responde.  
+- **Broadcast:** Tu PC pregunta por ARP: *“¿Quién tiene 192.168.1.20?”* → Todos escuchan; **solo** quien tiene esa IP responde.  
+- **Multicast:** Un profesor emite un vídeo a la clase: los PCs que se apuntaron al **grupo multicast** lo reciben; los demás **no**.
+
+---
+
+## Buenas prácticas (para devs y admins junior)
+- Usa **unicast** para el tráfico normal de tus apps web.  
+- **Minimiza** broadcast: segmenta en **VLAN** si la red crece.  
+- Para “uno a muchos”, evalúa **multicast** (si tu red lo soporta) o usa **CDN**/streaming sobre HTTP (unicast) según tu caso.  
+- En aulas/labs, activa **IGMP snooping** en switches si usas multicast para evitar inundaciones.
+
 ### Arquitecturas lógicas de servicio
 - **Cliente-servidor:** servicios centralizados (web, bases de datos, DNS, DHCP).
 - **Peer-to-peer (P2P):** los nodos actúan como clientes y servidores entre sí (uso didáctico: compartición simple en pequeñas redes).
