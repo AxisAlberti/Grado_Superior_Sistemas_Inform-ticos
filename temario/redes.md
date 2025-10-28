@@ -184,7 +184,7 @@ Es el cable **Ethernet** típico con conector **RJ-45**. Está formado por pares
 - **STP/FTP (Shielded/Foil Twisted Pair)**: con **apantallamiento** (malla o lámina). Se usa en entornos con más **ruido eléctrico** o tiradas largas junto a cables de potencia.
 
 <div style="text-align: center;">
-  <img src="../imagenes/uto.png" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <img src="../imagenes/utp.png" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
 </div>
 
 
