@@ -16,11 +16,7 @@
 ### ¿Qué es una red?
 Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresoras, cámaras, IoT…) **interconectados** que **intercambian datos** y **comparten recursos** (archivos, Internet, servicios). El objetivo es **comunicar** de forma **fiable, eficiente y segura**.
 
-### Objetivos de aprendizaje
-- Comprender los **beneficios** de una red frente al trabajo aislado.
-- Identificar **componentes** básicos (nodo, medio, interfaz) y **métricas** de rendimiento.
-- Reconocer **tipos de redes** según su alcance y **topologías** más comunes.
-- Diferenciar **modos de comunicación** (unicast/multicast/broadcast) y **arquitecturas** (cliente-servidor/peer-to-peer).
+
 
 ---
 
@@ -46,7 +42,6 @@ Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresora
 - **Ancho de banda (capacidad):** tasa máxima teórica (p. ej., 1 Gb/s).
 - **Throughput (rendimiento real):** tasa efectiva que se logra en práctica.
 - **Latencia:** tiempo que tarda un mensaje en ir de origen a destino.
-- **Jitter:** variación de la latencia entre paquetes (crítico en voz/vídeo).
 - **Pérdida de paquetes:** porcentaje de paquetes que no llegan.
 
 > Regla mental: para **juegos/voz** prima **baja latencia/jitter**; para **copias** prima **throughput**.
@@ -83,6 +78,9 @@ Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresora
 - **Broadcast:** uno-a-todos dentro de la misma red (ARP, descubrimientos).
 - **Multicast:** uno-a-muchos interesados (streaming, videoconferencia).
 
+<div style="text-align: center;">
+  <img src="../imagenes/broadcast.webp" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+</div>
 ---
 
 ### Arquitecturas lógicas de servicio
