@@ -253,6 +253,16 @@ Transmite **luz** en lugar de electricidad. Permite **altísimas velocidades** y
 - **Conectores** habituales: **LC**, **SC**.  
 - **Transceptores**: SFP/SFP+/SFP28/QSFP… (se insertan en switches/routers para elegir **velocidad** y **alcance**).
 
+
+---
+
+<div style="text-align: center;">
+  <img src="../imagenes/conectorfibra.png" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+</div>
+
+---
+
+
 **Ventajas**  
 - **Muy alta velocidad** (10G, 25G, 40G, 100G…).  
 - **Gran distancia** (decenas de km en monomodo).  
