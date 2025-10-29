@@ -28,6 +28,10 @@ Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresora
 
 ---
 
+
+
+
+
 ### Conceptos clave y terminología
 - **Nodo / Host:** dispositivo conectado a la red (PC, móvil, servidor…).
 - **Enlace / Medio:** camino por el que viajan los datos (**cobre, fibra, radio**).
@@ -336,6 +340,53 @@ Equipo o función que **filtra tráfico** según reglas (IP, puertos, protocolos
 
 ---
 
+## 3. Modelo OSI (7 capas)
+
+El modelo OSI (Open Systems Interconnection) es una referencia estándar que describe cómo se comunican los sistemas de red. Divide el proceso de comunicación en **siete capas**, cada una con funciones específicas, permitiendo la interoperabilidad y el diseño modular de las redes.
+
+### 3.1. Propósito del modelo OSI
+
+- Facilitar la comunicación entre equipos de diferentes fabricantes.
+- Establecer una arquitectura por capas para el diseño y análisis de protocolos de red.
+- Permitir el aislamiento de problemas: cada capa realiza funciones bien definidas.
+
+### 3.2. Descripción de las 7 capas del modelo OSI
+
+| Capa | Nombre              | Función principal                                                    | Ejemplos           |
+|------|---------------------|---------------------------------------------------------------------|--------------------|
+| 7    | Aplicación          | Interacción directa con el software del usuario                     | HTTP, FTP, SMTP    |
+| 6    | Presentación        | Formato y traducción de datos (codificaciones, cifrado, compresión) | SSL, JPEG, GIF     |
+| 5    | Sesión              | Establecimiento, gestión y finalización de sesiones                 | RPC, NetBIOS       |
+| 4    | Transporte          | Segmentación, control de errores y flujo                            | TCP, UDP           |
+| 3    | Red                 | Enrutamiento de datos entre redes                                   | IP, ICMP           |
+| 2    | Enlace de datos     | Comunicación punto a punto, control de acceso al medio              | Ethernet, MAC      |
+| 1    | Física              | Transmisión de bits por el medio físico                             | Cable, Wi-Fi       |
+
+### 3.3. Flujo de información en el modelo OSI
+
+- **Envío:** Los datos descienden capa a capa, agregando cabeceras específicas (encapsulación).
+- **Recepción:** Los datos ascienden capa a capa, eliminando cabeceras (desencapsulación).
+
+### 3.4. Importancia y utilidades para el desarrollo web
+
+- Permite comprender dónde actúan los protocolos usados en Internet (HTTP en la capa de aplicación, TCP en la de transporte).
+- Ayuda a localizar y resolver problemas de comunicación.
+- Facilita el aprendizaje de redes y el diseño de soluciones seguras y eficientes.
+
+### 3.5. Comparación con el modelo TCP/IP
+
+- El modelo TCP/IP es más simple (4 capas), pero está basado en los mismos principios.
+- El OSI es más detallado y útil en el ámbito académico y de análisis de redes.
+
+> El modelo OSI proporciona una “hoja de ruta” esencial para entender el funcionamiento de las tecnologías de redes y el flujo de información desde el usuario hasta el medio físico.
+
+---
+
+<div style="text-align: center;">
+  <img src="../imagenes/osi1.png" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+</div>
+
+---
 
 
 
