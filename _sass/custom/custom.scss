@@ -9,6 +9,10 @@ $brand: #2563eb;          /* primario */
 $brand-600: #1d4ed8;
 $brand-700: #1e40af;
 
+.fila-img { display: flex; gap: 12px; }
+.fila-img img { width: 100%; height: auto; display: block; }
+.fila-img > * { flex: 1 1 0; }
+
 /* Morado elegante */
 /*
 $brand: #7c3aed;
