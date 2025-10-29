@@ -382,12 +382,10 @@ El modelo OSI (Open Systems Interconnection) es una referencia estándar que des
 
 ---
 
-<div style="text-align: center;">
-  <img src="../imagenes/osi1.png" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+<div class="fila-img">
+  <img src="../imagenes/osi1.png" alt="Descripción 1">
+  <img src="../imagenes/osi2.png" alt="Descripción 2">
 </div>
 
 ---
-
-
-
 
