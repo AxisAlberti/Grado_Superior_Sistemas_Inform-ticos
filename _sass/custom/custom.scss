@@ -9,24 +9,37 @@ $brand: #2563eb;          /* primario */
 $brand-600: #1d4ed8;
 $brand-700: #1e40af;
 
-/* Bloque contenedor: empuja una imagen a la izquierda y la otra a la derecha */
+/* Contenedor: dos imágenes a los extremos, sin desbordar en pantalla compartida */
 .fila-extremos{
   display: flex;
-  justify-content: space-between; /* extremos */
+  justify-content: space-between;             /* izquierda ↔ derecha */
   align-items: center;
-  gap: 0;
-  max-width: 100%;
+  gap: clamp(8px, 2vw, 24px);                 /* separación responsiva */
+  max-width: min(96vw, 1200px);               /* nunca supera la ventana ni 1200px */
+  margin-inline: auto;                        /* centrado del bloque */
+  flex-wrap: nowrap;                          /* en ancho suficiente, siempre en una fila */
 }
 
-/* Imágenes dentro del contenedor */
+/* Imágenes: escalan sin deformarse y respetan el contenedor */
 .fila-extremos img{
   display: block;
   height: auto;
-  /* Elige UNA de estas dos líneas según prefieras: */
-  /* width: 50%;    */ /* ocupa media fila cada una (simétricas) */
-  /* max-width: 49%;*/ /* tamaño natural hasta 49% (ancladas a extremos) */
+  inline-size: clamp(240px, 45vw, 560px);     /* min 240px · hasta ~45% de la ventana · tope 560px */
+  max-width: 100%;
   object-fit: contain;
 }
+
+/* En pantallas estrechas (o ventana pequeña al compartir), apilar */
+@media (max-width: 700px){
+  .fila-extremos{
+    justify-content: center;
+    flex-wrap: wrap;                           /* permite salto de línea */
+  }
+  .fila-extremos img{
+    inline-size: clamp(240px, 90vw, 560px);    /* cada una ocupa casi todo el ancho */
+  }
+}
+
 /*
 .fila-img { display: flex; gap: 12px; }
 .fila-img img { width: 100%; height: auto; display: block; }
