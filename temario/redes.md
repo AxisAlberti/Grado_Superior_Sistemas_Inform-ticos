@@ -1,6 +1,6 @@
 
 
-# Índice — Redes 
+# Redes 
 
 1. [Introducción a las redes](#introducción-a-las-redes)
 2. [Medios y hardware de red](#medios-y-hardware-de-red)
