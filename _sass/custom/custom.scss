@@ -9,10 +9,29 @@ $brand: #2563eb;          /* primario */
 $brand-600: #1d4ed8;
 $brand-700: #1e40af;
 
+/* Bloque contenedor: empuja una imagen a la izquierda y la otra a la derecha */
+.fila-extremos{
+  display: flex;
+  justify-content: space-between; /* extremos */
+  align-items: center;
+  gap: 0;
+  max-width: 100%;
+}
+
+/* Imágenes dentro del contenedor */
+.fila-extremos img{
+  display: block;
+  height: auto;
+  /* Elige UNA de estas dos líneas según prefieras: */
+  /* width: 50%;    */ /* ocupa media fila cada una (simétricas) */
+  /* max-width: 49%;*/ /* tamaño natural hasta 49% (ancladas a extremos) */
+  object-fit: contain;
+}
+/*
 .fila-img { display: flex; gap: 12px; }
 .fila-img img { width: 100%; height: auto; display: block; }
 .fila-img > * { flex: 1 1 0; }
-
+*/
 /* Morado elegante */
 /*
 $brand: #7c3aed;
