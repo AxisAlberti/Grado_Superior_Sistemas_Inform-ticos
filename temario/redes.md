@@ -389,3 +389,156 @@ El modelo OSI (Open Systems Interconnection) es una referencia estándar que des
 
 ---
 
+## 4. Modelo TCP/IP
+
+### 4.1 ¿Qué es el modelo TCP/IP?
+
+El **modelo TCP/IP** es un modelo de referencia que define la arquitectura lógica utilizada para la comunicación entre sistemas interconectados en red. Establece cómo deben organizarse los protocolos y cómo deben interactuar entre sí para permitir el intercambio de datos de forma eficiente, fiable y escalable.
+
+Este modelo fue desarrollado en el contexto de los proyectos de investigación de **DARPA** y constituye la base técnica sobre la que se construyó **Internet**. A diferencia de otros modelos conceptuales, como el modelo OSI, el modelo TCP/IP está directamente vinculado a protocolos reales y ampliamente implantados.
+
+El modelo TCP/IP no describe implementaciones físicas concretas, sino que proporciona una **estructura funcional** que permite la interoperabilidad entre sistemas heterogéneos, independientemente del hardware, el sistema operativo o el fabricante.
+
+---
+
+### 4.2 Características principales del modelo TCP/IP
+
+El modelo TCP/IP presenta una serie de características que explican su adopción universal:
+
+- Está basado en **protocolos reales**, diseñados para su uso práctico en redes de gran escala.
+- Es **independiente del hardware** y del sistema operativo, lo que facilita la interoperabilidad.
+- Permite la **interconexión de redes heterogéneas**, incluso con tecnologías de enlace distintas.
+- Utiliza un sistema de **direccionamiento lógico jerárquico** mediante direcciones IP.
+- Está diseñado para ser **escalable**, tolerante a fallos y robusto ante pérdidas de conexión.
+- Se adapta tanto a redes locales como a redes de alcance global, como Internet.
+
+---
+
+### 4.3 Capas del modelo TCP/IP
+
+El modelo TCP/IP se estructura en **cuatro capas**, cada una de las cuales agrupa funciones relacionadas con un nivel concreto del proceso de comunicación. Cada capa ofrece servicios a la capa superior y utiliza los servicios de la capa inferior.
+
+---
+
+#### 4.3.1 Capa de Acceso a la Red
+
+La **capa de acceso a la red** es la responsable de la transmisión de datos a través del medio físico y de la interacción directa con el hardware de red.
+
+Esta capa integra funciones que, en otros modelos, se encuentran separadas en distintos niveles, como el acceso al medio, el direccionamiento físico y la transmisión de señales.
+
+**Funciones principales:**
+- Encapsular los paquetes IP en tramas.
+- Gestionar el acceso al medio de transmisión.
+- Controlar la entrega de datos dentro de la red local.
+- Convertir los datos en señales eléctricas, ópticas o inalámbricas.
+
+**Aspectos que abarca:**
+- Direcciones físicas (MAC).
+- Detección de errores a nivel de trama.
+- Métodos de acceso al medio (CSMA/CD, CSMA/CA).
+
+**Tecnologías y protocolos habituales:**
+- Ethernet
+- Wi-Fi
+- ARP
+
+---
+
+#### 4.3.2 Capa de Internet
+
+La **capa de Internet** se encarga de proporcionar un sistema de direccionamiento lógico y de hacer posible el envío de paquetes entre redes distintas. Su objetivo principal es que los paquetes alcancen su destino, aunque no garantiza la entrega ni el orden de los mismos.
+
+Esta capa permite la comunicación entre redes interconectadas mediante el uso de routers y mecanismos de enrutamiento.
+
+**Funciones principales:**
+- Asignación y uso de direcciones IP.
+- Enrutamiento de paquetes entre redes.
+- Fragmentación y reensamblado de paquetes según el MTU del enlace.
+- Gestión de errores y mensajes de control.
+
+**Protocolos principales:**
+- IP (IPv4 e IPv6)
+- ICMP
+- IPsec
+
+---
+
+#### 4.3.3 Capa de Transporte
+
+La **capa de transporte** proporciona la comunicación lógica entre procesos que se ejecutan en sistemas finales. Es responsable de establecer la comunicación extremo a extremo entre aplicaciones.
+
+Dependiendo del protocolo utilizado, esta capa puede ofrecer comunicación fiable o no fiable, orientada o no a conexión.
+
+**Funciones principales:**
+- Segmentación y reensamblado de datos.
+- Control de errores mediante numeración y confirmación de segmentos.
+- Control de flujo y congestión.
+- Multiplexación y demultiplexación mediante puertos.
+
+**Protocolos principales:**
+- **TCP**: protocolo orientado a conexión, fiable y con control de errores y flujo.
+- **UDP**: protocolo no orientado a conexión, sin control de errores, optimizado para baja latencia.
+
+---
+
+#### 4.3.4 Capa de Aplicación
+
+La **capa de aplicación** agrupa los protocolos que permiten a las aplicaciones de usuario acceder a los servicios de red. Define las reglas de comunicación entre aplicaciones distribuidas.
+
+Esta capa no corresponde a las aplicaciones en sí, sino a los **protocolos que utilizan** dichas aplicaciones para intercambiar información.
+
+**Funciones principales:**
+- Proporcionar servicios de red a las aplicaciones.
+- Definir formatos de datos y métodos de intercambio.
+- Gestionar sesiones, autenticación y control de acceso a nivel lógico.
+
+**Protocolos habituales:**
+- HTTP / HTTPS
+- FTP
+- SMTP
+- POP3 / IMAP
+- DNS
+- DHCP
+- SSH
+
+---
+
+### 4.4 Funcionamiento del modelo TCP/IP
+
+El funcionamiento del modelo TCP/IP se basa en un proceso de **encapsulación y desencapsulación** de datos entre capas:
+
+1. La aplicación genera los datos en la capa de aplicación.
+2. La capa de transporte segmenta los datos y añade cabeceras de control.
+3. La capa de Internet encapsula los segmentos en paquetes IP y determina la ruta.
+4. La capa de acceso a la red encapsula los paquetes en tramas y los transmite.
+5. En el equipo destino, el proceso se realiza a la inversa hasta entregar los datos a la aplicación correspondiente.
+
+---
+
+### 4.5 Relación entre el modelo TCP/IP y el modelo OSI
+
+El modelo OSI define **siete capas**, mientras que el modelo TCP/IP agrupa esas funciones en **cuatro capas**, integrando varios niveles del OSI en una sola capa TCP/IP.
+
+Esta simplificación hace que el modelo TCP/IP sea más práctico y esté mejor alineado con la implementación real de redes, mientras que el modelo OSI se utiliza principalmente como herramienta conceptual y didáctica.
+
+---
+
+### 4.6 Importancia del modelo TCP/IP
+
+El modelo TCP/IP es esencial en el ámbito de las redes porque:
+
+- Constituye la base técnica de Internet.
+- Permite la interoperabilidad entre sistemas y redes heterogéneas.
+- Facilita el diseño y la implementación de arquitecturas de red.
+- Es clave para el análisis y la resolución de incidencias de red.
+- Proporciona un marco común para el estudio de protocolos y servicios.
+
+---
+
+### 4.7 Resumen
+
+- El modelo TCP/IP define la arquitectura de comunicación en redes.
+- Se compone de cuatro capas funcionales.
+- Cada capa cumple un papel específico en la transmisión de datos.
+- Está basado en protocolos reales y ampliamente utilizados.
+- Su comprensión es fundamental en estudios de Grado Superior en informática y redes.
