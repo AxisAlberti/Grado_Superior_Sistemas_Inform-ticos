@@ -399,6 +399,13 @@ Este modelo fue desarrollado en el contexto de los proyectos de investigación d
 
 El modelo TCP/IP no describe implementaciones físicas concretas, sino que proporciona una **estructura funcional** que permite la interoperabilidad entre sistemas heterogéneos, independientemente del hardware, el sistema operativo o el fabricante.
 
+
+---
+
+<div style="text-align: center;">
+  <img src="../imagenes/tcpip.jpg" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+</div>
+
 ---
 
 ### 4.2 Características principales del modelo TCP/IP
@@ -411,6 +418,14 @@ El modelo TCP/IP presenta una serie de características que explican su adopció
 - Utiliza un sistema de **direccionamiento lógico jerárquico** mediante direcciones IP.
 - Está diseñado para ser **escalable**, tolerante a fallos y robusto ante pérdidas de conexión.
 - Se adapta tanto a redes locales como a redes de alcance global, como Internet.
+
+
+
+---
+
+<div style="text-align: center;">
+  <img src="../imagenes/topologia.webp" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+</div>
 
 ---
 
@@ -542,3 +557,6 @@ El modelo TCP/IP es esencial en el ámbito de las redes porque:
 - Cada capa cumple un papel específico en la transmisión de datos.
 - Está basado en protocolos reales y ampliamente utilizados.
 - Su comprensión es fundamental en estudios de Grado Superior en informática y redes.
+
+---
+
