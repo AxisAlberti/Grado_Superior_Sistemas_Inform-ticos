@@ -424,7 +424,7 @@ El modelo TCP/IP presenta una serie de características que explican su adopció
 ---
 
 <div style="text-align: center;">
-  <img src="../imagenes/topologia.webp" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <img src="../imagenes/protocolo-TCP-IP-vs-OSI.webp" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
 </div>
 
 ---
