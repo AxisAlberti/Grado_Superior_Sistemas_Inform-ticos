@@ -340,6 +340,27 @@ Equipo o función que **filtra tráfico** según reglas (IP, puertos, protocolos
 
 ---
 
+### Tabla explicativa de protocolos de red
+
+| Protocolo | Capa TCP/IP | Explicación |
+|----------|-------------|-------------|
+| **TCP** (Transmission Control Protocol) | Transporte | Protocolo orientado a conexión que garantiza la entrega fiable y ordenada de los datos mediante control de errores, confirmaciones y control de flujo. Se utiliza cuando la integridad de la información es prioritaria. |
+| **UDP** (User Datagram Protocol) | Transporte | Protocolo no orientado a conexión que envía datos sin verificar su recepción. Ofrece baja latencia y menor sobrecarga, siendo adecuado para aplicaciones en tiempo real. |
+| **IP** (Internet Protocol) | Internet | Protocolo encargado del direccionamiento lógico y del enrutamiento de paquetes entre redes. No garantiza la entrega ni el orden de los paquetes. |
+| **ICMP** (Internet Control Message Protocol) | Internet | Protocolo de control utilizado para enviar mensajes de error y diagnóstico relacionados con el funcionamiento de la red IP. |
+| **ARP** (Address Resolution Protocol) | Acceso a la red | Protocolo que permite obtener la dirección MAC asociada a una dirección IP dentro de una red local. Es esencial para la comunicación en redes Ethernet. |
+| **HTTP** (HyperText Transfer Protocol) | Aplicación | Protocolo que permite la transferencia de información en la web mediante un modelo cliente-servidor. No cifra la información transmitida. |
+| **HTTPS** (HyperText Transfer Protocol Secure) | Aplicación | Versión segura de HTTP que utiliza cifrado TLS para garantizar la confidencialidad, integridad y autenticación de los datos transmitidos. |
+| **FTP** (File Transfer Protocol) | Aplicación | Protocolo diseñado para la transferencia de archivos entre cliente y servidor, permitiendo la subida y descarga de ficheros. |
+| **SMTP** (Simple Mail Transfer Protocol) | Aplicación | Protocolo utilizado para el envío de correo electrónico desde clientes a servidores y entre servidores de correo. |
+| **POP3** (Post Office Protocol v3) | Aplicación | Protocolo de recepción de correo que descarga los mensajes del servidor al cliente, normalmente eliminándolos del servidor. |
+| **IMAP** (Internet Message Access Protocol) | Aplicación | Protocolo de gestión de correo que permite acceder y administrar los mensajes directamente en el servidor sin descargarlos localmente. |
+| **DNS** (Domain Name System) | Aplicación | Sistema de resolución de nombres que traduce nombres de dominio legibles por humanos en direcciones IP. |
+| **DHCP** (Dynamic Host Configuration Protocol) | Aplicación | Protocolo que asigna automáticamente direcciones IP y otros parámetros de red a los dispositivos de una red. |
+| **SSH** (Secure Shell) | Aplicación | Protocolo de administración remota que permite el acceso seguro a sistemas mediante cifrado de la comunicación. |
+| **Telnet** | Aplicación | Protocolo de acceso remoto similar a SSH, pero sin cifrado, por lo que se considera inseguro y obsoleto. |
+| **SNMP** (Simple Network Management Protocol) | Aplicación | Protocolo utilizado para la monitorización y gestión de dispositivos de red, como routers, switches y servidores. |
+
 ## 3. Modelo OSI (7 capas)
 
 El modelo OSI (Open Systems Interconnection) es una referencia estándar que describe cómo se comunican los sistemas de red. Divide el proceso de comunicación en **siete capas**, cada una con funciones específicas, permitiendo la interoperabilidad y el diseño modular de las redes.
