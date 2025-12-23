@@ -403,7 +403,7 @@ El modelo TCP/IP no describe implementaciones físicas concretas, sino que propo
 ---
 
 <div style="text-align: center;">
-  <img src="../imagenes/tcpip.jpg" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <img src="../imagenes/tcp.png" alt="Descripción de la imagen" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
 </div>
 
 ---
