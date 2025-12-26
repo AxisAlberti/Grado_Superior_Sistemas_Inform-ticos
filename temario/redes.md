@@ -1,13 +1,13 @@
 
 
-# Redes 
+## Índice
 
-1. [Introducción a las redes](#introducción-a-las-redes)
-2. [Medios y hardware de red](#medios-y-hardware-de-red)
-3. [Modelo OSI (7 capas)](#modelo-osi-7-capas)
-4. [Modelo TCP/IP](#modelo-tcpip)
-5. [Direccionamiento IPv4](#direccionamiento-ipv4)
-6. [Cálculo de subredes (IPv4)](#cálculo-de-subredes-ipv4)
+1. [Introducción a las redes](#1-introducción-a-las-redes)
+2. [Medios y hardware de red](#2-medios-y-hardware-de-red)
+3. [Modelo OSI (7 capas)](#3-modelo-osi-7-capas)
+4. [Modelo TCP/IP](#4-modelo-tcpip)
+5. [Direccionamiento IPv4](#5-direccionamiento-ipv4)
+6. [Cálculo de subredes (IPv4)](#6-cálculo-de-subredes-ipv4)
 7. [Introducción a IPv6](#introducción-a-ipv6)
 8. [Servicios esenciales](#servicios-esenciales)
 
