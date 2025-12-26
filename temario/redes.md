@@ -587,7 +587,7 @@ falta direccionamiento
 
 # Cómo calcular una subred IPv4 a mano
 
-## 1. De “cuántos hosts necesito” a la máscara
+## 6.1. De “cuántos hosts necesito” a la máscara
 
 1. Pregunta inicial  
    - ¿Cuántos hosts necesito en esta red (equipos, routers, impresoras, etc.)?
@@ -626,7 +626,7 @@ Resumen para alumnos:
 
 ---
 
-## 2. Cómo sacar red, hosts y broadcast
+## 6.2. Cómo sacar red, hosts y broadcast
 
 Suponemos que ya tenemos:
 
@@ -667,7 +667,7 @@ Tabla para este ejemplo:
 
 ---
 
-## 3. Plantilla de pasos para el alumnado
+## 6.3. Plantilla de pasos 
 
 1. Apuntar los hosts que necesito.  
 2. Calcular hosts + 2.  
