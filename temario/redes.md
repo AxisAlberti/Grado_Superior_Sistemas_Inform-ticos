@@ -581,3 +581,104 @@ El modelo TCP/IP es esencial en el ámbito de las redes porque:
 
 ---
 
+falta direccionamiento
+
+## Cálculo de subredes (IPv4)
+
+# Cómo calcular una subred IPv4 a mano
+
+## 1. De “cuántos hosts necesito” a la máscara
+
+1. Pregunta inicial  
+   - ¿Cuántos hosts necesito en esta red (equipos, routers, impresoras, etc.)?
+
+2. Sumar 2 direcciones  
+   - A los hosts que necesito les sumo 2, porque en cada red hay 2 direcciones que no se usan para equipos:
+     - Dirección de red.
+     - Dirección de broadcast.
+
+3. Buscar una potencia de 2 adecuada  
+   - Ejemplo: necesito 50 hosts.  
+   - 50 + 2 = 52.  
+   - Potencias de 2: 32, 64, 128, 256…  
+   - Cojo la primera potencia de 2 que sea mayor o igual que 52 → 64.
+
+4. Calcular bits de host y prefijo  
+   - Como 64 = 2^6, se necesitan 6 bits para los hosts.  
+   - Una IPv4 tiene 32 bits, así que:
+     - Bits de host = 6  
+     - Bits de red = 32 − 6 = 26  
+     - Prefijo: /26.
+
+5. Convertir el prefijo en máscara  
+   - /24 → 255.255.255.0  
+   - /25 → 255.255.255.128  
+   - /26 → 255.255.255.192  
+   - /27 → 255.255.255.224, etc.
+
+Resumen para alumnos:
+
+- Paso 1: hosts_necesarios + 2.  
+- Paso 2: buscar potencia de 2 mayor o igual que ese resultado.  
+- Paso 3: 2^(bits_host) = potencia elegida.  
+- Paso 4: prefijo = 32 − bits_host.  
+- Paso 5: pasar el prefijo a máscara decimal.
+
+---
+
+## 2. Cómo sacar red, hosts y broadcast
+
+Suponemos que ya tenemos:
+
+- Una dirección de partida: por ejemplo 192.168.10.0  
+- Un prefijo: por ejemplo /26 → máscara 255.255.255.192
+
+1. Calcular el tamaño del bloque  
+   - Bloque = 256 − último octeto de la máscara.  
+   - Para 255.255.255.192:  
+     - 256 − 192 = 64.  
+   - Significa que cada subred ocupa 64 direcciones en ese octeto.
+
+2. Ver qué rango de direcciones cubre la subred  
+   - Partimos de 192.168.10.0 y sumamos el tamaño de bloque:  
+     - Primera red: de 192.168.10.0 a 192.168.10.63.  
+   - Dentro de ese rango:  
+     - Dirección de red: 192.168.10.0  
+     - Broadcast: 192.168.10.63  
+     - Hosts utilizables: de 192.168.10.1 a 192.168.10.62  
+
+3. Número de hosts útiles  
+   - Con /26 hay 6 bits de host → 2^6 = 64 direcciones totales.  
+   - Hosts útiles: 64 − 2 = 62 (quitamos red y broadcast).
+
+Tabla para este ejemplo:
+
+| Dato                       | Valor              |
+|---------------------------|--------------------|
+| IP base                   | 192.168.10.0       |
+| Prefijo                   | /26                |
+| Máscara                   | 255.255.255.192    |
+| Tamaño de bloque          | 64                 |
+| Dirección de red          | 192.168.10.0       |
+| Primer host               | 192.168.10.1       |
+| Último host               | 192.168.10.62      |
+| Dirección de broadcast    | 192.168.10.63      |
+| Hosts útiles en la subred | 62                 |
+
+---
+
+## 3. Plantilla de pasos para el alumnado
+
+1. Apuntar los hosts que necesito.  
+2. Calcular hosts + 2.  
+3. Buscar la potencia de 2 más pequeña que sea mayor o igual que ese número.  
+4. De esa potencia sacar:
+   - Bits de host (por ejemplo, si la potencia es 64, entonces bits_host = 6).  
+   - Prefijo = 32 − bits_host.  
+   - Máscara en decimal.  
+5. Calcular el tamaño de bloque: 256 − último octeto de la máscara.  
+6. Con una IP base:
+   - Dirección de red = primer número del bloque.  
+   - Broadcast = red + bloque − 1.  
+   - Primer host = red + 1.  
+   - Último host = broadcast − 1.
