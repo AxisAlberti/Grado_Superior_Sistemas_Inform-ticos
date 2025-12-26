@@ -583,7 +583,7 @@ El modelo TCP/IP es esencial en el ámbito de las redes porque:
 
 falta direccionamiento
 
-# Cálculo de subredes (IPv4)
+# 6. Cálculo de subredes (IPv4)
 
 
 ## 6.1. De “cuántos hosts necesito” a la máscara
