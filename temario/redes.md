@@ -11,7 +11,7 @@
 7. [Introducción a IPv6](#introducción-a-ipv6)
 8. [Servicios esenciales](#servicios-esenciales)
 
-## Introducción a las redes
+## 1. Introducción a las redes
 
 ### ¿Qué es una red?
 Una **red** es un conjunto de **dispositivos** (ordenadores, móviles, impresoras, cámaras, IoT…) **interconectados** que **intercambian datos** y **comparten recursos** (archivos, Internet, servicios). El objetivo es **comunicar** de forma **fiable, eficiente y segura**.
